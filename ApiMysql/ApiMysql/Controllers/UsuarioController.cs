@@ -57,10 +57,10 @@ namespace ApiMysql.Controllers
         }
 
 
-        private Usuario Authenticate(string login, string password)
+        private  Usuario Authenticate(string login, string password)
         {
 
-            Usuario usuario = _context.Usuario.FirstOrDefault(o => o.Nombre1 == login && o.Contrasena == password );
+            Usuario usuario =  _context.Usuario.FirstOrDefault(o => o.Nombre1 == login && o.Contrasena == password);
             if (usuario == null)
             {
                 return null;
