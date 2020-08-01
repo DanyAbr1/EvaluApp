@@ -1,0 +1,10 @@
+C:\wk_directory\EvaluaApp\EvaluApp.Mobile\EvaluApp.Mobile\EvaluApp.Mobile\bin\Debug\netstandard2.0\EvaluApp.Mobile.deps.json
+C:\wk_directory\EvaluaApp\EvaluApp.Mobile\EvaluApp.Mobile\EvaluApp.Mobile\bin\Debug\netstandard2.0\EvaluApp.Mobile.dll
+C:\wk_directory\EvaluaApp\EvaluApp.Mobile\EvaluApp.Mobile\EvaluApp.Mobile\bin\Debug\netstandard2.0\EvaluApp.Mobile.pdb
+C:\wk_directory\EvaluaApp\EvaluApp.Mobile\EvaluApp.Mobile\EvaluApp.Mobile\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\wk_directory\EvaluaApp\EvaluApp.Mobile\EvaluApp.Mobile\EvaluApp.Mobile\obj\Debug\netstandard2.0\EvaluApp.Mobile.AssemblyInfoInputs.cache
+C:\wk_directory\EvaluaApp\EvaluApp.Mobile\EvaluApp.Mobile\EvaluApp.Mobile\obj\Debug\netstandard2.0\EvaluApp.Mobile.AssemblyInfo.cs
+C:\wk_directory\EvaluaApp\EvaluApp.Mobile\EvaluApp.Mobile\EvaluApp.Mobile\obj\Debug\netstandard2.0\EvaluApp.Mobile.dll
+C:\wk_directory\EvaluaApp\EvaluApp.Mobile\EvaluApp.Mobile\EvaluApp.Mobile\obj\Debug\netstandard2.0\EvaluApp.Mobile.pdb
+C:\wk_directory\EvaluaApp\EvaluApp.Mobile\EvaluApp.Mobile\EvaluApp.Mobile\obj\Debug\netstandard2.0\Views\LoginPage.xaml.g.cs
+C:\wk_directory\EvaluaApp\EvaluApp.Mobile\EvaluApp.Mobile\EvaluApp.Mobile\obj\Debug\netstandard2.0\EvaluApp.Mobile.csprojAssemblyReference.cache
