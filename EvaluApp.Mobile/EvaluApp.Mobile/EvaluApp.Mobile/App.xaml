@@ -8,7 +8,7 @@
 
         <!--  Application resource dictionary  -->
         <ResourceDictionary>
-            <x:String x:Key="UrlAPI">https://dev-adva-iban.azurewebsites.net</x:String>
+            <x:String x:Key="UrlAPI">https://192.168.1.7:44384/Api/Usuario/Authenticate</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

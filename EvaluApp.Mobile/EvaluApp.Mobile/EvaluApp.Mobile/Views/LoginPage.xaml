@@ -17,7 +17,7 @@
             Text="{Binding Password}" />
 
         <ActivityIndicator IsVisible="{Binding IsRunning}" />
-        <Button Command="{Binding Login}" Text="Inciar Sesion" />
+        <Button Command="{Binding LoginCommand}" Text="Inciar Sesion" />
     </StackLayout>
 
 </ContentPage>

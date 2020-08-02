@@ -35,7 +35,7 @@ namespace EvaluApp.Mobile
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();            
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
-           //containerRegistry.Register<IApiServiceUsuario, ApiServiceUsuario>();
+            //containerRegistry.Register<IApiServiceUsuario, ApiServiceUsuario>();
         }
     }
 }
