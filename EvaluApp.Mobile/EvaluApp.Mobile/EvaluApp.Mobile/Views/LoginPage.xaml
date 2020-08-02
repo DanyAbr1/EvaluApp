@@ -16,7 +16,7 @@
             Placeholder="Contraseña"
             Text="{Binding Password}" />
 
-        <ActivityIndicator IsVisible="{Binding IsRunning}" />
+        <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />
         <Button Command="{Binding LoginCommand}" Text="Inciar Sesion" />
     </StackLayout>
 

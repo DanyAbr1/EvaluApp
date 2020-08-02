@@ -3,7 +3,9 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,14 +23,24 @@ namespace EvaluApp.Mobile.Services
             try
             {
 
-                AppContext.SetSwitch("System.Net.Http.UseSocketsHttpHandler", false);
-                var request = new LoginRequest { Login = email, Password = password };
+                var request = new LoginRequest { Nombre1 = email, Contrasena = password };
                 var requestString = JsonConvert.SerializeObject(request);
                 var content = new StringContent(requestString, Encoding.UTF8, "application/json");
-                var client = new HttpClient
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                var client = new HttpClient(clientHandler)
                 {
                     BaseAddress = new Uri(urlBase)
                 };
+
+                //var client = new HttpClient
+                //{
+                //    BaseAddress = new Uri(urlBase)
+                //};
+
 
 
                 var url = $"{urlBase}{servicePrefix}{controller}";
