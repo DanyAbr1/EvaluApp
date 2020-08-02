@@ -11,8 +11,10 @@ using System.Threading.Tasks;
 
 namespace EvaluApp.Mobile.Services
 {
-    public class ApiServiceUsuario
+    public class ApiService
     {
+        #region Usuario
+
         public async Task<Response<Usuario>> GetUsuarioByEmailAsync(
          string urlBase,
          string servicePrefix,
@@ -72,5 +74,67 @@ namespace EvaluApp.Mobile.Services
                 };
             }
         }
+        #endregion
+
+        #region Vehiculos
+        public async Task<Response<List<Vehiculo>>> GetVehiculosUser(
+         string urlBase,
+         string servicePrefix,
+         string controller,         
+         int id)
+        {
+            try
+            {
+
+                //var request = new IdRequest { IdUsuario = id };
+                //var requestString = JsonConvert.SerializeObject(request);
+                //var content = new StringContent("", Encoding.UTF8, "application/json");
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                var client = new HttpClient(clientHandler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                //var client = new HttpClient
+                //{
+                //    BaseAddress = new Uri(urlBase)
+                //};
+
+
+
+                var url = $"{urlBase}{servicePrefix}{controller}/{id}";
+                var response = await client.GetAsync(url);
+                var result = await response.Content.ReadAsStringAsync();                
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<List<Vehiculo>>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var vehiculo = JsonConvert.DeserializeObject<List<Vehiculo>>(result);
+                return new Response<List<Vehiculo>>
+                {
+                    IsSuccess = true,
+                    Result = vehiculo
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<List<Vehiculo>>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+        #endregion
     }
 }

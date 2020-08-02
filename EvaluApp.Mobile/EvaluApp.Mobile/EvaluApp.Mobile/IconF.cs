@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AdvansysIBanking.Mobile
+namespace EvaluApp.Mobile
 {
     public static class IconF
     {

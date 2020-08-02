@@ -16,7 +16,7 @@ namespace EvaluApp.Mobile.ViewModels
     public class LoginPageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
-        private readonly ApiServiceUsuario _apiService;
+        private readonly ApiService _apiService;
         private string _password;
         private bool _isRunning;
         private bool _isEnabled;
@@ -26,7 +26,7 @@ namespace EvaluApp.Mobile.ViewModels
             : base(navigationService)
         {
             _navigationService = navigationService;
-            _apiService =  new ApiServiceUsuario();
+            _apiService =  new ApiService();
         }
 
         #region Propiedades
@@ -112,9 +112,11 @@ namespace EvaluApp.Mobile.ViewModels
 
             IsRunning = false;
 
+            Preferences.Set("idUsuario", response.Result.Idusuario);
+
             var parameter = new NavigationParameters();
             parameter.Add("Usuario", response.Result);
-            await _navigationService.NavigateAsync("/MenuPage/NavigationPage/ProductosPageTest", parameter);
+            await _navigationService.NavigateAsync("/MenuPage/NavigationPage/VehiculosPage", parameter);
         }
         #endregion
     }

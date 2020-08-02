@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage
+    x:Class="EvaluApp.Mobile.Views.MenuPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:locator="clr-namespace:EvaluApp.Mobile.Behaviors"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+
+                <ListView
+                    x:Name="ListViewMenu"
+                    Grid.Row="3"
+                    HasUnevenRows="True"
+                    ItemsSource="{Binding Menus, Mode=TwoWay}"
+                    SelectedItem="{Binding Menu}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout
+                                    Padding="20"
+                                    Orientation="Horizontal"
+                                    Spacing="10"
+                                    VerticalOptions="Center">
+                                    <!--<StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SelectMenuCommand}" />
+                                        </StackLayout.GestureRecognizers>-->
+                                    <Label
+                                        FontFamily="{StaticResource MaterialFontFamily}"
+                                        FontSize="Medium"
+                                        HorizontalOptions="Start"
+                                        Text="{Binding Icono}"
+                                        VerticalOptions="Center" />
+
+                                    <Label
+                                        FontSize="Medium"
+                                        HorizontalOptions="Start"
+                                        Text="{Binding Titulo}"
+                                        VerticalOptions="Center" />
+
+
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+</MasterDetailPage>

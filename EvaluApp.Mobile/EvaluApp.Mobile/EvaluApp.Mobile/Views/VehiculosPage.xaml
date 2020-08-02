@@ -7,7 +7,41 @@
     prism:ViewModelLocator.AutowireViewModel="True">
 
 
-    <StackLayout>
-        <Label Text="vehiculos paginas" />
-    </StackLayout>
+
+
+    <Grid HorizontalOptions="CenterAndExpand">
+        <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />
+        <ListView
+            HasUnevenRows="true"
+            HeightRequest="{Binding ListaVehiculos}"
+            IsPullToRefreshEnabled="False"
+            ItemsSource="{Binding ListaVehiculos, Mode=TwoWay}"
+            SelectedItem="{Binding SelectVehiculo}"
+            VerticalOptions="Start">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Frame HorizontalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <StackLayout Padding="8" Orientation="Horizontal">
+
+                                        <Label
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="Matricula"
+                                            VerticalOptions="Center" />
+
+                                        <Label
+                                            HorizontalOptions="End"
+                                            Text="{Binding Matricula}"
+                                            VerticalOptions="Center" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </ContentPage>

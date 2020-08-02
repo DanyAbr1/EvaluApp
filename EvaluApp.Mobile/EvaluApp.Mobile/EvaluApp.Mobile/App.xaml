@@ -7,8 +7,16 @@
     <Application.Resources>
 
         <!--  Application resource dictionary  -->
+
         <ResourceDictionary>
-            <x:String x:Key="UrlAPI">https://192.168.1.7:44384/Api/Usuario/Authenticate</x:String>
+            <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="Font Awesome 5 Free" />
+                <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free" />
+            </OnPlatform>
+        </ResourceDictionary>
+
+        <ResourceDictionary>
+            <x:String x:Key="UrlAPI">https://192.168.1.7:5004</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>
