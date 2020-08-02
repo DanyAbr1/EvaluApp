@@ -20,6 +20,8 @@ namespace EvaluApp.Mobile.Services
         {
             try
             {
+
+                AppContext.SetSwitch("System.Net.Http.UseSocketsHttpHandler", false);
                 var request = new LoginRequest { Login = email, Password = password };
                 var requestString = JsonConvert.SerializeObject(request);
                 var content = new StringContent(requestString, Encoding.UTF8, "application/json");
