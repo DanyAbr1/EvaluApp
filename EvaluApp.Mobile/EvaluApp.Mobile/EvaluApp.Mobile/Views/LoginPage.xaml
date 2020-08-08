@@ -19,6 +19,16 @@
 
         <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />
         <Button Command="{Binding LoginCommand}" Text="Inciar Sesion" />
+
+        <Label
+            FontAttributes="Italic"
+            Text="Solicitar Acceso"
+            TextColor="Black"
+            TextDecorations="Underline">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding RegistroCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
     </StackLayout>
 
 </ContentPage>

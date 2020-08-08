@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EvaluApp.Mobile.Views.NuevoUsuarioPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:EvaluApp.Mobile.Controls"
+    xmlns:local="clr-namespace:EvaluApp.Mobile.Behaviors"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+
+    <ScrollView>
+        <Frame Style="{StaticResource ProductoFrame}" VerticalOptions="Fill">
+            <StackLayout Margin="10" Spacing="10">
+
+                <controls:StandardEntry
+                    Padding="10"
+                    BackgroundColor="#F5F9FA"
+                    BorderColor="Gray"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Keyboard="Text"
+                    Opacity="50"
+                    Placeholder="Nombres"
+                    PlaceholderColor="Gray"
+                    Text="{Binding Nombre}" />
+
+                <controls:StandardEntry
+                    Padding="10"
+                    BackgroundColor="#F5F9FA"
+                    BorderColor="Gray"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Keyboard="Text"
+                    Opacity="50"
+                    Placeholder="Apellidos"
+                    PlaceholderColor="Gray"
+                    Text="{Binding Apellido}">
+                    <Entry.Behaviors>
+                        <local:MaxLengthValidatorBehavior MaxLength="30" />
+                    </Entry.Behaviors>
+                </controls:StandardEntry>
+
+                <controls:StandardEntry
+                    Padding="10"
+                    BackgroundColor="#F5F9FA"
+                    BorderColor="Gray"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Keyboard="Email"
+                    Opacity="50"
+                    Placeholder="Correo"
+                    PlaceholderColor="Gray"
+                    Text="{Binding Email}">
+                    <Entry.Behaviors>
+                        <local:EmailValidatorBehavior />
+                    </Entry.Behaviors>
+                </controls:StandardEntry>
+
+
+                <controls:StandardEntry
+                    Padding="10"
+                    BackgroundColor="#F5F9FA"
+                    BorderColor="Gray"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Keyboard="Default"
+                    Opacity="50"
+                    Placeholder="Login"
+                    PlaceholderColor="Gray"
+                    Text="{Binding Login}">
+                    <Entry.Behaviors>
+                        <local:MaxLengthValidatorBehavior MaxLength="30" />
+                    </Entry.Behaviors>
+                </controls:StandardEntry>
+
+                <Picker
+                    Title="Tipo Documento"
+                    ItemDisplayBinding="{Binding NameDocu}"
+                    ItemsSource="{Binding TipoDocumeto}"
+                    SelectedItem="{Binding ItemDocumento}"
+                    Visual="Material" />
+
+                <controls:StandardEntry
+                    Padding="10"
+                    BackgroundColor="#F5F9FA"
+                    BorderColor="Gray"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Keyboard="Default"
+                    Opacity="50"
+                    Placeholder="Documento"
+                    PlaceholderColor="Gray"
+                    Text="{Binding Documento}">
+                    <Entry.Behaviors>
+                        <local:MaxLengthValidatorBehavior MaxLength="30" />
+                    </Entry.Behaviors>
+                </controls:StandardEntry>
+
+                <controls:StandardEntry
+                    Padding="10"
+                    BackgroundColor="#F5F9FA"
+                    BorderColor="Gray"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Keyboard="Numeric"
+                    Placeholder="Teléfono"
+                    PlaceholderColor="Gray"
+                    Text="{Binding Telefono}">
+                    <Entry.Behaviors>
+                        <local:MaskedBehavior Mask="(XXX) XXX-XXXX" />
+                    </Entry.Behaviors>
+                </controls:StandardEntry>
+
+                <Picker
+                    x:Name="PickerProducto"
+                    Title="Tipo Producto"
+                    ItemDisplayBinding="{Binding NameProducto}"
+                    ItemsSource="{Binding TipoProducto}"
+                    SelectedItem="{Binding ItemProducto}"
+                    Visual="Material" />
+
+                <controls:StandardEntry
+                    Padding="10"
+                    BackgroundColor="#F5F9FA"
+                    BorderColor="Gray"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Keyboard="Default"
+                    Opacity="50"
+                    Placeholder="Producto"
+                    PlaceholderColor="Gray"
+                    Text="{Binding Producto}">
+                    <Entry.Behaviors>
+                        <local:MaxLengthValidatorBehavior MaxLength="30" />
+                    </Entry.Behaviors>
+                </controls:StandardEntry>
+
+                <!--<ActivityIndicator
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        IsRunning="{Binding IsRunning}"
+                        IsVisible="{Binding IsRunning}"
+                        Style="{StaticResource ActivityStyle}" />-->
+
+                <Button
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Margin="15"
+                    Command="{Binding SolicitudCommand}"
+                    IsEnabled="{Binding IsEnabled}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Text="Enviar Solicitud"
+                    VerticalOptions="EndAndExpand" />
+
+            </StackLayout>
+        </Frame>
+    </ScrollView>
+</ContentPage>

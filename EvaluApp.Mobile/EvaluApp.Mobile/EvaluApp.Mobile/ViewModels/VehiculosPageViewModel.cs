@@ -24,6 +24,7 @@ namespace EvaluApp.Mobile.ViewModels
             _apiService = new ApiService();
             _listaVehiculos = new List<Vehiculo>();
             _usuario = Preferences.Get("idUsuario",0);
+            Title = "Inicio";
 
         }
 

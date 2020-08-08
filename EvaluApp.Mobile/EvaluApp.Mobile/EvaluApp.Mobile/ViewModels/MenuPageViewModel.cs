@@ -58,9 +58,9 @@ namespace EvaluApp.Mobile.ViewModels
             {
                 new Menu
                 {
-                    Icono = IconFont.Car,
+                    Icono = IconFont.Home,
                     Pagina = "VehiculosPage",
-                    Titulo = "Vehiculos"
+                    Titulo = "Inicio"
                 },
                  new Menu
                 {

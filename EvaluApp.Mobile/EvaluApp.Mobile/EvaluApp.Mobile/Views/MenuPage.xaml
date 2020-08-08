@@ -16,7 +16,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-
+ 
 
                 <ListView
                     x:Name="ListViewMenu"
@@ -33,8 +33,8 @@
                                     Spacing="10"
                                     VerticalOptions="Center">
                                     <!--<StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding SelectMenuCommand}" />
-                                        </StackLayout.GestureRecognizers>-->
+                                        <TapGestureRecognizer Command="{Binding SelectMenuCommand}" />
+                                    </StackLayout.GestureRecognizers>-->
                                     <Label
                                         FontFamily="{StaticResource MaterialFontFamily}"
                                         FontSize="Medium"
