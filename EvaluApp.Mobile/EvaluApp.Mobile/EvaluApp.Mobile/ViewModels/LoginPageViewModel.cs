@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace EvaluApp.Mobile.ViewModels
@@ -21,6 +22,8 @@ namespace EvaluApp.Mobile.ViewModels
         private bool _isRunning;
         private bool _isEnabled;
         private DelegateCommand _loginCommand;
+        private DelegateCommand _registrarCommand;
+        private DelegateCommand _restaurarPassCommand;
 
         public LoginPageViewModel(INavigationService navigationService)
             : base(navigationService)
@@ -32,6 +35,11 @@ namespace EvaluApp.Mobile.ViewModels
         #region Propiedades
 
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
+        public DelegateCommand RegistrarCommand => _registrarCommand ?? (_registrarCommand = new DelegateCommand(RegisterUser));
+
+        public DelegateCommand RestaurarPassCommand => _restaurarPassCommand ?? (_restaurarPassCommand = new DelegateCommand(OlvidePasswordPage));
+
+        
         public string Email { get; set; }
 
         public string Password
@@ -118,6 +126,19 @@ namespace EvaluApp.Mobile.ViewModels
             parameter.Add("Usuario", response.Result);
             await _navigationService.NavigateAsync("/MenuPage/NavigationPage/VehiculosPage", parameter);
         }
+
+
+        private async void RegisterUser()
+        {
+            await _navigationService.NavigateAsync("NuevoUsuarioPage");
+        }
+
+        private async void OlvidePasswordPage()
+        {
+            await _navigationService.NavigateAsync("OlvidePasswordPage");
+
+        }
+
         #endregion
     }
 }

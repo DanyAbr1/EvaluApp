@@ -6,16 +6,16 @@
     xmlns:controls="clr-namespace:EvaluApp.Mobile.Controls"
     xmlns:local="clr-namespace:EvaluApp.Mobile.Behaviors"
     xmlns:prism="http://prismlibrary.com"
+    Title="Solicitud de registro"
     prism:ViewModelLocator.AutowireViewModel="True">
 
 
     <ScrollView>
-        <Frame Style="{StaticResource ProductoFrame}" VerticalOptions="Fill">
+        <Frame VerticalOptions="Fill">
             <StackLayout Margin="10" Spacing="10">
 
                 <controls:StandardEntry
                     Padding="10"
-                    BackgroundColor="#F5F9FA"
                     BorderColor="Gray"
                     BorderThickness="1"
                     CornerRadius="10"
@@ -23,11 +23,10 @@
                     Opacity="50"
                     Placeholder="Nombres"
                     PlaceholderColor="Gray"
-                    Text="{Binding Nombre}" />
+                    Text="{Binding Nombre2}" />
 
                 <controls:StandardEntry
                     Padding="10"
-                    BackgroundColor="#F5F9FA"
                     BorderColor="Gray"
                     BorderThickness="1"
                     CornerRadius="10"
@@ -42,116 +41,90 @@
                 </controls:StandardEntry>
 
                 <controls:StandardEntry
+                    Margin="0,15"
                     Padding="10"
-                    BackgroundColor="#F5F9FA"
-                    BorderColor="Gray"
-                    BorderThickness="1"
-                    CornerRadius="10"
-                    Keyboard="Email"
-                    Opacity="50"
-                    Placeholder="Correo"
-                    PlaceholderColor="Gray"
-                    Text="{Binding Email}">
-                    <Entry.Behaviors>
-                        <local:EmailValidatorBehavior />
-                    </Entry.Behaviors>
-                </controls:StandardEntry>
-
-
-                <controls:StandardEntry
-                    Padding="10"
-                    BackgroundColor="#F5F9FA"
                     BorderColor="Gray"
                     BorderThickness="1"
                     CornerRadius="10"
                     Keyboard="Default"
                     Opacity="50"
-                    Placeholder="Login"
+                    Placeholder="Usuaruio"
                     PlaceholderColor="Gray"
-                    Text="{Binding Login}">
-                    <Entry.Behaviors>
-                        <local:MaxLengthValidatorBehavior MaxLength="30" />
-                    </Entry.Behaviors>
-                </controls:StandardEntry>
-
-                <Picker
-                    Title="Tipo Documento"
-                    ItemDisplayBinding="{Binding NameDocu}"
-                    ItemsSource="{Binding TipoDocumeto}"
-                    SelectedItem="{Binding ItemDocumento}"
-                    Visual="Material" />
-
-                <controls:StandardEntry
-                    Padding="10"
-                    BackgroundColor="#F5F9FA"
-                    BorderColor="Gray"
-                    BorderThickness="1"
-                    CornerRadius="10"
-                    Keyboard="Default"
-                    Opacity="50"
-                    Placeholder="Documento"
-                    PlaceholderColor="Gray"
-                    Text="{Binding Documento}">
+                    Text="{Binding Nombre}">
                     <Entry.Behaviors>
                         <local:MaxLengthValidatorBehavior MaxLength="30" />
                     </Entry.Behaviors>
                 </controls:StandardEntry>
 
                 <controls:StandardEntry
+                    Margin="0,10"
                     Padding="10"
-                    BackgroundColor="#F5F9FA"
                     BorderColor="Gray"
                     BorderThickness="1"
                     CornerRadius="10"
-                    Keyboard="Numeric"
-                    Placeholder="Teléfono"
+                    IsPassword="True"
+                    Opacity="50"
+                    Placeholder="Contraseña"
                     PlaceholderColor="Gray"
-                    Text="{Binding Telefono}">
+                    Text="{Binding Contrasena}" />
+
+
+                <controls:StandardEntry
+                    Padding="10"
+                    BorderColor="Gray"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Keyboard="Default"
+                    Opacity="50"
+                    Placeholder="Cedula"
+                    PlaceholderColor="Gray"
+                    Text="{Binding Cedula}">
                     <Entry.Behaviors>
-                        <local:MaskedBehavior Mask="(XXX) XXX-XXXX" />
+                        <local:MaskedBehavior Mask="XXX-XXXXXXX-X" />
                     </Entry.Behaviors>
                 </controls:StandardEntry>
+
+                <Label Text="Fecha de Nacimiento" />
+                <DatePicker Date="{Binding FechaNacimiento}" />
+
+
 
                 <Picker
                     x:Name="PickerProducto"
-                    Title="Tipo Producto"
-                    ItemDisplayBinding="{Binding NameProducto}"
-                    ItemsSource="{Binding TipoProducto}"
-                    SelectedItem="{Binding ItemProducto}"
+                    Title="Tipo Licencia"
+                    ItemDisplayBinding="{Binding NameLicencia}"
+                    ItemsSource="{Binding TipoLicencia}"
+                    SelectedItem="{Binding ItemLicencia}"
                     Visual="Material" />
+
+
+                <Label Text="Fecha de Vencimiento" />
+                <DatePicker Date="{Binding FechaVence}" />
+
 
                 <controls:StandardEntry
                     Padding="10"
-                    BackgroundColor="#F5F9FA"
                     BorderColor="Gray"
                     BorderThickness="1"
                     CornerRadius="10"
                     Keyboard="Default"
                     Opacity="50"
-                    Placeholder="Producto"
+                    Placeholder="Matricula"
                     PlaceholderColor="Gray"
-                    Text="{Binding Producto}">
+                    Text="{Binding Matricula}">
                     <Entry.Behaviors>
                         <local:MaxLengthValidatorBehavior MaxLength="30" />
                     </Entry.Behaviors>
                 </controls:StandardEntry>
 
-                <!--<ActivityIndicator
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="3"
-                        IsRunning="{Binding IsRunning}"
-                        IsVisible="{Binding IsRunning}"
-                        Style="{StaticResource ActivityStyle}" />-->
+
+                <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />
+
 
                 <Button
-                    Grid.Row="4"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3"
                     Margin="15"
                     Command="{Binding SolicitudCommand}"
                     IsEnabled="{Binding IsEnabled}"
-                    Style="{StaticResource ButtonPrimary}"
                     Text="Enviar Solicitud"
                     VerticalOptions="EndAndExpand" />
 

@@ -8,6 +8,17 @@
 
         <!--  Application resource dictionary  -->
 
+        <Color x:Key="ColorTextPrimary">#00944F</Color>
+        <Color x:Key="ColorHeaderSection">#efefef</Color>
+        <Color x:Key="ColorTextPrimaryDark">#00644F</Color>
+        <Color x:Key="Accent">#6981A4</Color>
+        <Color x:Key="NavigationPrimary">#00944F</Color>
+        <Color x:Key="TitleResumenColor">#FFCF06</Color>
+        <Color x:Key="MontoColor">#008a41</Color>
+        <Color x:Key="BackgroundPagesColor">#f2f7f5</Color>
+        <Color x:Key="LabelInformacion">#009251</Color>
+
+
         <ResourceDictionary>
             <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
                 <On Platform="iOS" Value="Font Awesome 5 Free" />
@@ -15,8 +26,26 @@
             </OnPlatform>
         </ResourceDictionary>
 
+
+        <!--  Styles  -->
+
+
+        <Style x:Key="ProductoFrame" TargetType="Frame">
+            <Setter Property="Margin" Value="8" />
+            <Setter Property="Padding" Value="8" />
+            <Setter Property="BorderColor" Value="{StaticResource Accent}" />
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+
+        <Style TargetType="{x:Type Frame}">
+            <Setter Property="Margin" Value="8" />
+            <Setter Property="Padding" Value="8" />
+            <Setter Property="BorderColor" Value="{StaticResource Accent}" />
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+
         <ResourceDictionary>
-            <x:String x:Key="UrlAPI">https://192.168.1.7:5004</x:String>
+            <x:String x:Key="UrlAPI">https://apipointcar.azurewebsites.net</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

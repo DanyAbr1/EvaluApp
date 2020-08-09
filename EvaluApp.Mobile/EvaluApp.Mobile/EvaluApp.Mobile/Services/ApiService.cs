@@ -74,6 +74,52 @@ namespace EvaluApp.Mobile.Services
                 };
             }
         }
+
+        public async Task<Response<object>> SolicitudRegistro(string urlBase, string servicePrefix, string controller, UsuarioRequest userRegistro)
+        {
+            try
+            {
+                var requestString = JsonConvert.SerializeObject(userRegistro);
+                var content = new StringContent(requestString, Encoding.UTF8, "application/json");
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                var client = new HttpClient(clientHandler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                var url = $"{urlBase}{servicePrefix}{controller}";
+                var response = await client.PostAsync(url, content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<object>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var x = JsonConvert.DeserializeObject<object>(result);
+                return new Response<object>
+                {
+                    IsSuccess = true,
+                    Result = x
+                };
+            }
+            catch (Exception ex)
+            {
+
+                return new Response<object>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
         #endregion
 
         #region Vehiculos
@@ -135,6 +181,8 @@ namespace EvaluApp.Mobile.Services
                 };
             }
         }
+
+        
         #endregion
     }
 }

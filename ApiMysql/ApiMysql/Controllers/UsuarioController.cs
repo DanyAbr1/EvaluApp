@@ -14,6 +14,7 @@ namespace ApiMysql.Controllers
     public class UsuarioController: Controller
     {
         private readonly SistemacarrosContext _context;
+        private string _resultado;
 
         public UsuarioController(SistemacarrosContext context)
         {
@@ -57,6 +58,8 @@ namespace ApiMysql.Controllers
         }
 
 
+
+        
         private  Usuario Authenticate(string login, string password)
         {
 
@@ -71,6 +74,69 @@ namespace ApiMysql.Controllers
             usuario.Contrasena = null;
 
             return usuario;
+        }
+
+        [HttpPost("AddUser")]
+        public IActionResult Post([FromBody] Usuario vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var resultado = ValidarModelo(vm);
+                if (!resultado)
+                {
+                    return BadRequest(_resultado);
+                }
+
+                
+
+                    _context.Usuario.Update(vm);
+                    _context.SaveChanges();
+                    return NoContent();
+                
+
+            }
+            catch (Exception e)
+            {                
+                return StatusCode(500, "No se pudo completar la operación.");
+            }
+        }
+
+        private bool ValidarModelo(Usuario vm)
+        {
+            var valid = true;
+
+            if (string.IsNullOrWhiteSpace(vm.Nombre2))
+            {
+                _resultado = "Debe especificar el nombre.";
+                valid = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(vm.Apellido1))
+            {
+                _resultado = "Debe especificar el apellido.";
+                valid = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(vm.Nombre1))
+            {
+                _resultado = "Debe especificar el Usuario.";
+                valid = false;
+            }
+
+            //var obj1 = _context.SolicitudUsuario.FirstOrDefault(o => o.SolicitudUsuarioId != vm.SolicitudUsuarioId &&
+            //o.NombreEstablecimiento == vm.NombreEstablecimiento &&
+            //o.Ciudad == vm.Ciudad);
+            //if (obj1 != null)
+            //{
+            //    resultado.Agregar("El nombre del establecimiento existe para la misma ciudad.");
+            //}
+
+            return valid;
         }
 
     }

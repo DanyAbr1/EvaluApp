@@ -20,15 +20,34 @@
         <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />
         <Button Command="{Binding LoginCommand}" Text="Inciar Sesion" />
 
-        <Label
-            FontAttributes="Italic"
-            Text="Solicitar Acceso"
-            TextColor="Black"
-            TextDecorations="Underline">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding RegistroCommand}" />
-            </Label.GestureRecognizers>
-        </Label>
+
+        <StackLayout Orientation="Horizontal">
+            <Label
+                Margin="15"
+                FontAttributes="Italic"
+                FontSize="Large"
+                HorizontalOptions="EndAndExpand"
+                Text="Solicitar Acceso"
+                TextColor="Black"
+                TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding RegistrarCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label
+                Margin="15"
+                FontAttributes="Italic"
+                FontSize="Large"
+                HorizontalOptions="StartAndExpand"
+                Text="Olvido la contraseña?"
+                TextColor="Black"
+                TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding RestaurarPassCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>
