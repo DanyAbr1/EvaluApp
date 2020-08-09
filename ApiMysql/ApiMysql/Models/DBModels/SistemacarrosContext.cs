@@ -161,11 +161,11 @@ namespace ApiMysql.Models.DBModels
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("idtipoevento");
 
-                entity.HasOne(d => d.IdusuarioNavigation)
-                    .WithMany(p => p.Eventos)
-                    .HasForeignKey(d => d.Idusuario)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("idusuario2");
+                //entity.HasOne(d => d.IdusuarioNavigation)
+                //    .WithMany(p => p.Eventos)
+                //    .HasForeignKey(d => d.Idusuario)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("idusuario2");
 
                 entity.HasOne(d => d.IdvehiculoNavigation)
                     .WithMany(p => p.Eventos)

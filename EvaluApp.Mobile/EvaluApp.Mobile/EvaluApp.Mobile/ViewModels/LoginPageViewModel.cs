@@ -30,6 +30,7 @@ namespace EvaluApp.Mobile.ViewModels
         {
             _navigationService = navigationService;
             _apiService =  new ApiService();
+            _isEnabled = true;
         }
 
         #region Propiedades

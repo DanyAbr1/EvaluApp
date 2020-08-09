@@ -77,7 +77,7 @@ namespace ApiMysql.Controllers
         }
 
         [HttpPost("AddUser")]
-        public IActionResult Post([FromBody] Usuario vm)
+        public IActionResult Post([FromBody] UsuarioDto usuario)
         {
             if (!ModelState.IsValid)
             {
@@ -86,27 +86,58 @@ namespace ApiMysql.Controllers
 
             try
             {
-                var resultado = ValidarModelo(vm);
+                var resultado = ValidarModelo(usuario);
                 if (!resultado)
                 {
                     return BadRequest(_resultado);
                 }
 
-                
 
-                    _context.Usuario.Update(vm);
-                    _context.SaveChanges();
-                    return NoContent();
-                
 
+                var vm = new Usuario()
+                {
+                    Nombre1 = usuario.Nombre1,
+                    Nombre2 = usuario.Nombre2,
+                    Apellido1 = usuario.Apellido1,
+                    Cedula = usuario.Cedula,
+                    Fechanacimiento = usuario.FechaNacimiento,
+                    Contrasena = usuario.Contrasena
+                };
+
+                _context.Usuario.Update(vm);
+                _context.SaveChanges();
+               
+
+                var currentUser = _context.Usuario.FirstOrDefault(o => o.Nombre1 == usuario.Nombre1 && o.Contrasena == usuario.Contrasena);
+                var vehiculoObj = new Vehiculo()
+                {
+                    Matricula = usuario.Matricula,
+                    Idusuario1 = currentUser.Idusuario
+                };
+
+                _context.Vehiculo.Update(vehiculoObj);
+                _context.SaveChanges();
+
+                var licenciaObj = new Licencia()
+                {
+                    Tipo = usuario.Tipo,
+                    Vence = usuario.Vence,
+                    Idusuario = currentUser.Idusuario
+
+                };
+
+                _context.Licencia.Update(licenciaObj);
+                _context.SaveChanges();
             }
             catch (Exception e)
             {                
                 return StatusCode(500, "No se pudo completar la operación.");
             }
+
+            return NoContent();
         }
 
-        private bool ValidarModelo(Usuario vm)
+        private bool ValidarModelo(UsuarioDto vm)
         {
             var valid = true;
 
