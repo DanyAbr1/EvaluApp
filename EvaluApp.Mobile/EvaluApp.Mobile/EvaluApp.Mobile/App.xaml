@@ -54,7 +54,8 @@
 
 
         <ResourceDictionary>
-            <x:String x:Key="UrlAPI">https://192.168.1.107:5004</x:String>
+            <!--<x:String x:Key="UrlAPI">https://apipointcardemo.azurewebsites.net</x:String>-->
+            <x:String x:Key="UrlAPI">https://192.168.43.206:5004</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

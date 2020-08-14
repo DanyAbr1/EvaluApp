@@ -55,7 +55,7 @@
                                         <Label
                                             FontAttributes="Bold"
                                             HorizontalOptions="End"
-                                            Text="100.00"
+                                            Text="{Binding Puntos}"
                                             VerticalOptions="Center" />
                                     </StackLayout>
 

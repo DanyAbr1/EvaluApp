@@ -182,7 +182,66 @@ namespace EvaluApp.Mobile.Services
             }
         }
 
-        
+
+        public async Task<Response<List<Eventos>>> GetEventosDeHoy(
+       string urlBase,
+       string servicePrefix,
+       string controller,
+       object request)
+        {
+            try
+            {
+
+                //var request = new IdRequest { IdUsuario = id };
+                var requestString = JsonConvert.SerializeObject(request);
+                var content = new StringContent(requestString, Encoding.UTF8, "application/json");
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                var client = new HttpClient(clientHandler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                //var client = new HttpClient
+                //{
+                //    BaseAddress = new Uri(urlBase)
+                //};
+
+
+
+                var url = $"{urlBase}{servicePrefix}{controller}";
+                var response = await client.PostAsync(url, content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<List<Eventos>>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var eventos = JsonConvert.DeserializeObject<List<Eventos>>(result);
+                return new Response<List<Eventos>>
+                {
+                    IsSuccess = true,
+                    Result = eventos
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<List<Eventos>>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
         #endregion
     }
 }

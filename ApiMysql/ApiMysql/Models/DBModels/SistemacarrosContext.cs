@@ -103,17 +103,24 @@ namespace ApiMysql.Models.DBModels
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
-                entity.HasOne(d => d.IdusuarioNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.Idusuario)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("idusuario3");
+                entity.Property(e => e.Gforce)
+                   .IsRequired()
+                   .HasColumnName("gforce")
+                   .HasColumnType("char(40)")
+                   .HasCharSet("utf8")
+                   .HasCollation("utf8_general_ci");
 
-                entity.HasOne(d => d.IdvehiculoNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.Idvehiculo)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("idvehiculo1");
+                //entity.HasOne(d => d.IdusuarioNavigation)
+                //    .WithMany()
+                //    .HasForeignKey(d => d.Idusuario)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("idusuario3");
+
+                //entity.HasOne(d => d.IdvehiculoNavigation)
+                //    .WithMany()
+                //    .HasForeignKey(d => d.Idvehiculo)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("idvehiculo1");
             });
 
             modelBuilder.Entity<Eventos>(entity =>
@@ -138,7 +145,7 @@ namespace ApiMysql.Models.DBModels
 
                 entity.Property(e => e.Idtipoevento)
                     .HasColumnName("idtipoevento")
-                    .HasColumnType("int(11)");
+                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Idusuario)
                     .HasColumnName("idusuario")
@@ -155,11 +162,11 @@ namespace ApiMysql.Models.DBModels
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
-                entity.HasOne(d => d.IdtipoeventoNavigation)
-                    .WithMany(p => p.Eventos)
-                    .HasForeignKey(d => d.Idtipoevento)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("idtipoevento");
+                //entity.HasOne(d => d.IdtipoeventoNavigation)
+                //    .WithMany(p => p.Eventos)
+                //    .HasForeignKey(d => d.Idtipoevento)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("idtipoevento");
 
                 //entity.HasOne(d => d.IdusuarioNavigation)
                 //    .WithMany(p => p.Eventos)
@@ -167,11 +174,11 @@ namespace ApiMysql.Models.DBModels
                 //    .OnDelete(DeleteBehavior.ClientSetNull)
                 //    .HasConstraintName("idusuario2");
 
-                entity.HasOne(d => d.IdvehiculoNavigation)
-                    .WithMany(p => p.Eventos)
-                    .HasForeignKey(d => d.Idvehiculo)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("idvehiculo");
+                //entity.HasOne(d => d.IdvehiculoNavigation)
+                //    .WithMany(p => p.Eventos)
+                //    .HasForeignKey(d => d.Idvehiculo)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("idvehiculo");
             });
 
             modelBuilder.Entity<Licencia>(entity =>

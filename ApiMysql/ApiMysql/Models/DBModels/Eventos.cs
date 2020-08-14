@@ -11,8 +11,8 @@ namespace ApiMysql.Models.DBModels
         public int Idvehiculo { get; set; }
         public int Idusuario { get; set; }
 
-        public virtual Tipoeventos IdtipoeventoNavigation { get; set; }
-        public virtual Usuario IdusuarioNavigation { get; set; }
-        public virtual Vehiculo IdvehiculoNavigation { get; set; }
+        //public virtual Tipoeventos IdtipoeventoNavigation { get; set; }
+        //public virtual Usuario IdusuarioNavigation { get; set; }
+        //public virtual Vehiculo IdvehiculoNavigation { get; set; }
     }
 }
