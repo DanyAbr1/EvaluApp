@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EvaluApp.Mobile.Views.HistoralPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    Title="Historial"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+
+    <Grid HorizontalOptions="FillAndExpand">
+
+        <ListView
+            HasUnevenRows="true"
+            HeightRequest="{Binding ListaEventos}"
+            IsPullToRefreshEnabled="False"
+            ItemsSource="{Binding ListaEventos, Mode=TwoWay}"
+            VerticalOptions="Start">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ProductoFrame}">
+                                <StackLayout>
+                                    <StackLayout Padding="8" Orientation="Horizontal">
+
+                                        <Label
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="{Binding Descripcion}"
+                                            VerticalOptions="Center" />
+
+                                        <Label
+                                            HorizontalOptions="End"
+                                            Text="{Binding Puntos, StringFormat='{0:N2}'}"
+                                            VerticalOptions="Center" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

@@ -64,14 +64,14 @@ namespace EvaluApp.Mobile.ViewModels
                 },
                  new Menu
                 {
-                    Icono = IconFont.History,
-                    Pagina = "HistoriaPage",
-                    Titulo = "Historial"
+                    Icono = IconFont.Store,
+                    Pagina = "StorePage",
+                    Titulo = "Store"
                 },
                   new Menu
                 {
                     Icono = IconFont.User,
-                    Pagina = "UsuarioPage",
+                    Pagina = "PerfilUsuarioPage",
                     Titulo = "Usuario"
                 },                
                 new Menu

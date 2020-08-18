@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage
+    x:Class="EvaluApp.Mobile.Views.NuevoVehiculoPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:EvaluApp.Mobile.Controls"
+    xmlns:local="clr-namespace:EvaluApp.Mobile.Behaviors"
+    xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <StackLayout>
+        <Frame>
+            <StackLayout>
+                <controls:StandardEntry
+                    Padding="10"
+                    BorderColor="Gray"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Keyboard="Default"
+                    Opacity="50"
+                    Placeholder="Matricula"
+                    PlaceholderColor="Gray"
+                    Text="{Binding Matricula}">
+                    <Entry.Behaviors>
+                        <local:MaxLengthValidatorBehavior MaxLength="30" />
+                    </Entry.Behaviors>
+                </controls:StandardEntry>
+
+
+                <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />
+
+
+                <Button
+                    Margin="15"
+                    Command="{Binding SolicitudCommand}"
+                    IsEnabled="{Binding IsEnabled}"
+                    Text="Enviar Solicitud"
+                    VerticalOptions="EndAndExpand" />
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</popup:PopupPage>

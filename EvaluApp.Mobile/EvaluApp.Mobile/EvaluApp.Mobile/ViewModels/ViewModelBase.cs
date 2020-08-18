@@ -4,6 +4,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 
 namespace EvaluApp.Mobile.ViewModels
 {
@@ -35,6 +36,11 @@ namespace EvaluApp.Mobile.ViewModels
 
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
+            string nombrePagina = this.GetType().Name;
+            if (!nombrePagina.Equals("MenuPageViewModel"))
+            {
+                Preferences.Set("menuPage", nombrePagina);
+            }
 
         }
 

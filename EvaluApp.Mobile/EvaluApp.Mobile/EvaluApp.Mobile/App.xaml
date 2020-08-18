@@ -51,11 +51,11 @@
             <Setter Property="TextColor" Value="White" />
             <Setter Property="BackgroundColor" Value="#28AFEA" />
         </Style>
-
+        <Style x:Key="ButtonNormal" TargetType="Button" />
 
         <ResourceDictionary>
-            <!--<x:String x:Key="UrlAPI">https://apipointcardemo.azurewebsites.net</x:String>-->
-            <x:String x:Key="UrlAPI">https://192.168.43.206:5004</x:String>
+            <x:String x:Key="UrlAPI">https://apipointcardemo.azurewebsites.net</x:String>
+            <!--<x:String x:Key="UrlAPI">https://192.168.43.206:5004</x:String>-->
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

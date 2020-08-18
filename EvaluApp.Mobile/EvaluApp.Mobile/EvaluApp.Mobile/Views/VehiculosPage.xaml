@@ -3,6 +3,7 @@
     x:Class="EvaluApp.Mobile.Views.VehiculosPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:locator="clr-namespace:EvaluApp.Mobile.Behaviors"
     xmlns:prism="http://prismlibrary.com"
     Title="{Binding Title}"
     prism:ViewModelLocator.AutowireViewModel="True">
@@ -10,61 +11,67 @@
 
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+" />
+        <ToolbarItem Command="{Binding NuevoVehiculoCommand}" Text="+" />
     </ContentPage.ToolbarItems>
-    <Grid HorizontalOptions="CenterAndExpand">
-        <ListView
-            HasUnevenRows="true"
-            HeightRequest="{Binding ListaVehiculos}"
-            IsPullToRefreshEnabled="False"
-            ItemsSource="{Binding ListaVehiculos, Mode=TwoWay}"
-            SelectedItem="{Binding SelectVehiculo}"
-            VerticalOptions="Start">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-                            <Frame HorizontalOptions="FillAndExpand">
+    <ScrollView>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />
+            <Grid HorizontalOptions="CenterAndExpand">
+                <ListView
+                    locator:ItemTappedAttached.Command="{Binding SelectHistoralCommand}"
+                    HasUnevenRows="true"
+                    HeightRequest="{Binding ListaVehiculos}"
+                    IsPullToRefreshEnabled="False"
+                    ItemsSource="{Binding ListaVehiculos, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectVehiculo}"
+                    VerticalOptions="Start">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
                                 <StackLayout>
-                                    <StackLayout Padding="8" Orientation="Horizontal">
+                                    <Frame HorizontalOptions="FillAndExpand">
+                                        <StackLayout>
+                                            <StackLayout Padding="8" Orientation="Horizontal">
 
-                                        <Label
-                                            FontAttributes="Bold"
-                                            HorizontalOptions="StartAndExpand"
-                                            Text="Matricula"
-                                            VerticalOptions="Center" />
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    Text="Matricula"
+                                                    VerticalOptions="Center" />
 
-                                        <Label
-                                            FontAttributes="Bold"
-                                            HorizontalOptions="End"
-                                            Text="{Binding Matricula}"
-                                            VerticalOptions="Center" />
-                                    </StackLayout>
-                                    <BoxView
-                                        BackgroundColor="#efefef"
-                                        HeightRequest="1"
-                                        HorizontalOptions="FillAndExpand" />
-                                    <StackLayout Padding="8" Orientation="Horizontal">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    HorizontalOptions="End"
+                                                    Text="{Binding Matricula}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                            <BoxView
+                                                BackgroundColor="#efefef"
+                                                HeightRequest="1"
+                                                HorizontalOptions="FillAndExpand" />
+                                            <StackLayout Padding="8" Orientation="Horizontal">
 
-                                        <Label
-                                            FontAttributes="Bold"
-                                            HorizontalOptions="StartAndExpand"
-                                            Text="Total de Puntos:"
-                                            VerticalOptions="Center" />
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    Text="Total de Puntos:"
+                                                    VerticalOptions="Center" />
 
-                                        <Label
-                                            FontAttributes="Bold"
-                                            HorizontalOptions="End"
-                                            Text="{Binding Puntos}"
-                                            VerticalOptions="Center" />
-                                    </StackLayout>
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    HorizontalOptions="End"
+                                                    Text="{Binding Puntos, StringFormat='{0:N2}'}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
 
+                                        </StackLayout>
+                                    </Frame>
                                 </StackLayout>
-                            </Frame>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

@@ -16,11 +16,12 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
- 
+
 
                 <ListView
                     x:Name="ListViewMenu"
                     Grid.Row="3"
+                    locator:ItemTappedAttached.Command="{Binding SelectMenuCommand}"
                     HasUnevenRows="True"
                     ItemsSource="{Binding Menus, Mode=TwoWay}"
                     SelectedItem="{Binding Menu}">

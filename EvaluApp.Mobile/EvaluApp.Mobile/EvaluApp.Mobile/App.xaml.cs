@@ -39,6 +39,10 @@ namespace EvaluApp.Mobile
             containerRegistry.RegisterForNavigation<MenuPage, MenuPageViewModel>();
             containerRegistry.RegisterForNavigation<NuevoUsuarioPage, NuevoUsuarioPageViewModel>();
             containerRegistry.RegisterForNavigation<OlvidePasswordPage, OlvidePasswordPageViewModel>();
+            containerRegistry.RegisterForNavigation<HistoralPage, HistoralPageViewModel>();
+            containerRegistry.RegisterForNavigation<StorePage, StorePageViewModel>();
+            containerRegistry.RegisterForNavigation<PerfilUsuarioPage, PerfilUsuarioPageViewModel>();
+            containerRegistry.RegisterForNavigation<NuevoVehiculoPage, NuevoVehiculoPageViewModel>();
         }
     }
 }
