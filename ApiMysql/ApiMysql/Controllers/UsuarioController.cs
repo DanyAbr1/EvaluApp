@@ -170,5 +170,24 @@ namespace ApiMysql.Controllers
             return valid;
         }
 
+        [HttpPost("olvidePass")]
+        public IActionResult OlvidePass([FromBody] Usuario usuario)
+        {
+            var user = _context.Usuario.FirstOrDefault(o => o.Nombre1 == usuario.Nombre1);
+            if (user != null)
+            {
+                user.Contrasena = usuario.Contrasena;
+            }
+            else
+            {
+                return BadRequest("Usuario o Contraseña invalidos.");
+            }
+
+            _context.Usuario.Update(user);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
     }
 }

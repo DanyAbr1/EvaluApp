@@ -89,7 +89,7 @@ namespace ApiMysql.Controllers
             return evento;
         }
 
-        private float SpeedMax(string lat, string lon)
+        private double SpeedMax(string lat, string lon)
         {
             //lat = "19.4463081";
             //lon = "-70.6849884";
@@ -114,11 +114,11 @@ namespace ApiMysql.Controllers
                 var Sustituir2 = Texto2.Split(',');
                 var valores = Sustituir2[0].ToString().Split(':');
                 var Resultado = valores[1].ToString();
-                return float.Parse(Resultado.Replace("\"", ""));
+                return double.Parse(Resultado.Replace("\"", "")) * 0.621371;
             }
             catch (Exception)
             {
-                return 60;
+                return 20;
             }
         }
 

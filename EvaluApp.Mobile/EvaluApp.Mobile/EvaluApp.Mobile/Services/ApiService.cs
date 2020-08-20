@@ -75,6 +75,66 @@ namespace EvaluApp.Mobile.Services
             }
         }
 
+        public async Task<Response<object>> OlvidePassword(
+        string urlBase,
+        string servicePrefix,
+        string controller,
+        object request
+        )
+        {
+            try
+            {
+
+                // var request = new LoginRequest { Nombre1 = nuevapass., Contrasena = password };
+                var requestString = JsonConvert.SerializeObject(request);
+                var content = new StringContent(requestString, Encoding.UTF8, "application/json");
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                var client = new HttpClient(clientHandler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                //var client = new HttpClient
+                //{
+                //    BaseAddress = new Uri(urlBase)
+                //};
+
+
+
+                var url = $"{urlBase}{servicePrefix}{controller}";
+                var response = await client.PostAsync(url, content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<object>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var usuario = JsonConvert.DeserializeObject<Object>(result);
+                return new Response<Object>
+                {
+                    IsSuccess = true,
+                    Result = usuario
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<Object>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
         public async Task<Response<object>> SolicitudRegistro(string urlBase, string servicePrefix, string controller, UsuarioRequest userRegistro)
         {
             try

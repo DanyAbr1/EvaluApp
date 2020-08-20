@@ -33,7 +33,7 @@ namespace EvaluApp.Mobile.ViewModels
             _listaEventos = new List<Eventos>();
             _usuario = Preferences.Get("idUsuario",0);
             Title = "Inicio";
-        
+            GetVehiculos();
         }
 
 
@@ -69,7 +69,7 @@ namespace EvaluApp.Mobile.ViewModels
 
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
-            await GetVehiculos();            
+            
         }
 
         private async Task GetEventos()
@@ -145,10 +145,13 @@ namespace EvaluApp.Mobile.ViewModels
                 return;
             }
 
-
-            response.Result[0].Puntos = 5000;                       
-            ListaVehiculos = response.Result.ToList();
-            await GetEventos();
+            if (response.Result.Count > 0)
+            {
+                response.Result[0].Puntos = 5000;
+                ListaVehiculos = response.Result.ToList();
+                await GetEventos();
+            }
+            
                       
             IsRunning = false;
         }
