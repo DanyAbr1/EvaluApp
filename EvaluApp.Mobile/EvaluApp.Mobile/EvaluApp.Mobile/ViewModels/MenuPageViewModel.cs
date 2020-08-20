@@ -13,12 +13,13 @@ namespace EvaluApp.Mobile.ViewModels
         private DelegateCommand _selectMenuCommand;
         private DelegateCommand _verPerfilUsuarioCommand;
         private Menu _menu;
-        private Usuario _usuario;
+        private string _nombreCompleto;
 
         public MenuPageViewModel(INavigationService navigationService)
              : base(navigationService)
         {
             _navigationService = navigationService;
+            _nombreCompleto = Preferences.Get("nombreCompleto", "");
             LoadMenus();
         }
 
@@ -37,11 +38,11 @@ namespace EvaluApp.Mobile.ViewModels
         //    set => SetProperty(ref _nombreCompleto, value);
         //}
 
-        //public string AppVersion
-        //{
-        //    get => _appVersion;
-        //    set => SetProperty(ref _appVersion, value);
-        //}
+        public string NombreCompleto
+        {
+            get => _nombreCompleto;
+            set => SetProperty(ref _nombreCompleto, value);
+        }
 
         public Menu Menu
         {

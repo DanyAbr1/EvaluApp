@@ -1,6 +1,7 @@
 ﻿using ApiMysql.Models.DBModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,6 +30,40 @@ namespace ApiMysql.Controllers
                 return BadRequest("No se encontraron datos para este usuario");
             }                      
             return Ok(vehiculos);
+        }
+
+
+        [HttpPost("AddVehiculo")]
+        public IActionResult Post([FromBody] Vehiculo vehiculo)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {                
+                var result = _context.Vehiculo.FirstOrDefault(v => v.Matricula == vehiculo.Matricula );
+                if (result != null)
+                {
+                    return BadRequest("La Matricula ya esta registrada.");
+                }
+
+                var vehiculoObj = new Vehiculo()
+                {
+                    Matricula = vehiculo.Matricula,
+                    Idusuario1 = vehiculo.Idusuario1
+                };
+
+                _context.Vehiculo.Update(vehiculoObj);
+                _context.SaveChanges();                
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "No se pudo completar la operación.");
+            }
+
+            return NoContent();
         }
     }
 }

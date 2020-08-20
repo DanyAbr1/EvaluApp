@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<popup:PopupPage
+<ContentPage
     x:Class="EvaluApp.Mobile.Views.NuevoVehiculoPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:EvaluApp.Mobile.Controls"
     xmlns:local="clr-namespace:EvaluApp.Mobile.Behaviors"
-    xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:prism="http://prismlibrary.com"
+    Title="Agregar Vehiculo"
     prism:ViewModelLocator.AutowireViewModel="True">
 
     <StackLayout>
@@ -33,11 +33,11 @@
 
                 <Button
                     Margin="15"
-                    Command="{Binding SolicitudCommand}"
+                    Command="{Binding AddVehiculoCommand}"
                     IsEnabled="{Binding IsEnabled}"
-                    Text="Enviar Solicitud"
+                    Text="Agregar"
                     VerticalOptions="EndAndExpand" />
             </StackLayout>
         </Frame>
     </StackLayout>
-</popup:PopupPage>
+</ContentPage>

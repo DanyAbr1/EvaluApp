@@ -186,7 +186,7 @@ namespace ApiMysql.Controllers
             _context.Usuario.Update(user);
             _context.SaveChanges();
 
-            return Ok();
+            return NoContent();
         }
 
     }
