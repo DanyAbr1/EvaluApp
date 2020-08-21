@@ -10,6 +10,8 @@ namespace ApiMysql.Models.DBModels
         public string Puntos { get; set; }
         public int Idvehiculo { get; set; }
         public int Idusuario { get; set; }
+        public float Velocidad { get; set; }
+        public TimeSpan Hora { get; set; }
 
         //public virtual Tipoeventos IdtipoeventoNavigation { get; set; }
         //public virtual Usuario IdusuarioNavigation { get; set; }

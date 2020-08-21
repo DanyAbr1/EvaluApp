@@ -23,15 +23,21 @@ namespace ApiMysql.Controllers
         public ActionResult<IEnumerable<Eventos>> BuscarDatos([FromBody] Datos datos)
         {
 
-            var fechahoy = DateTime.Now.Date.ToString("yyyy-MM-dd");            
-            if (datos.Fecha != null) fechahoy = datos.Fecha.ToString("yyyy-MM-dd");
+            var fechahoy = DateTime.Now.Date.ToString("yyyy-MM-dd");
+            //if (datos.Fecha != null) fechahoy = datos.Fecha.ToString("yyyy-MM-dd");
             var result = _context.Datos.Where(e => e.Idusuario == datos.Idusuario && e.Idvehiculo == datos.Idvehiculo && e.Fecha == DateTime.Parse(fechahoy)).ToList();
-            result = result.Where(e => float.Parse(e.Velocidad) > 15).ToList();
+            result = result.Where(e => float.Parse(e.Velocidad) > 20 || float.Parse(e.Gforce) >= 60).ToList();
+            //var group = result.GroupBy(x=> {
+
+            //    return TimeSpan.FromMinutes(x.Hora.Minutes);
+            
+            //});
+
+
             if (result == null )
             {
                 return BadRequest("No se encontraron datos para este usuario");
-            }
-
+            }            
             var eventos = CreaEventos(result);
             return Ok(eventos);
         }
@@ -46,38 +52,52 @@ namespace ApiMysql.Controllers
                 _context.RemoveRange(borra);
                 _context.SaveChanges();
             }
-            for (int i = 0; i < datos.Count; i++)
+
+            int minutos = 0;
+            for (int i = 0; i < datos.Count(); i++)
             {
-                if (float.Parse(datos[i].Gforce) > 60)
-                {
 
-                    evento.Add(new Eventos()
+
+                if (minutos != datos[i].Hora.Minutes) 
+                { 
+                    if (float.Parse(datos[i].Gforce) >= 60)
                     {
+                        {
 
-                        Idvehiculo = datos[i].Idvehiculo,
-                        Idusuario = datos[i].Idusuario,
-                        Idtipoevento = 1,
-                        Puntos = "30"
-                    });
+                            evento.Add(new Eventos()
+                            {
+                                Idvehiculo = datos[i].Idvehiculo,
+                                Idusuario = datos[i].Idusuario,
+                                Idtipoevento = 1,
+                                Puntos = "30",
+                                Velocidad = float.Parse(datos[i].Velocidad),
+                                Hora = datos[i].Hora
+                            });
 
+                        }
+                    }
+                        var speed = SpeedMax(datos[i].Latitud, datos[i].Longitud);
+
+
+                        if ((speed > 0) && speed < float.Parse(datos[i].Velocidad))
+                        {
+
+                            evento.Add(new Eventos()
+                            {
+
+                                Idvehiculo = datos[i].Idvehiculo,
+                                Idusuario = datos[i].Idusuario,
+                                Idtipoevento = 2,
+                                Puntos = "20",
+                                Velocidad = float.Parse(datos[i].Velocidad),
+                                Hora = datos[i].Hora
+
+                            });
+
+                        }
                 }
 
-                var speed = SpeedMax(datos[i].Latitud, datos[i].Longitud);
-
-
-                if ((speed > 0) && speed < float.Parse(datos[i].Velocidad))
-                {
-
-                    evento.Add(new Eventos()
-                    {
-
-                        Idvehiculo = datos[i].Idvehiculo,
-                        Idusuario = datos[i].Idusuario,
-                        Idtipoevento = 2,
-                        Puntos = "20"
-                    });
-
-                }
+                minutos = datos[i].Hora.Minutes;
             }
 
             if (evento != null)

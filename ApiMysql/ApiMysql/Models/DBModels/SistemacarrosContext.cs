@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ApiMysql.Models.DBModels
 {
@@ -162,6 +160,13 @@ namespace ApiMysql.Models.DBModels
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
+                entity.Property(e => e.Velocidad)
+                    .HasColumnName("velocidad")
+                    .HasColumnType("float(11)");
+
+                entity.Property(e => e.Hora)
+                    .HasColumnName("hora")
+                    .HasColumnType("time");
                 //entity.HasOne(d => d.IdtipoeventoNavigation)
                 //    .WithMany(p => p.Eventos)
                 //    .HasForeignKey(d => d.Idtipoevento)
