@@ -96,17 +96,13 @@ namespace ApiMysql.Models.DBModels
 
                 entity.Property(e => e.Velocidad)
                     .IsRequired()
-                    .HasColumnName("velocidad")
-                    .HasColumnType("char(40)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
+                    .HasColumnName("velocidad")                    
+                    .HasColumnType("float(11)");
 
                 entity.Property(e => e.Gforce)
                    .IsRequired()
-                   .HasColumnName("gforce")
-                   .HasColumnType("char(40)")
-                   .HasCharSet("utf8")
-                   .HasCollation("utf8_general_ci");
+                   .HasColumnName("gforce")                  
+                   .HasColumnType("float(11)");
 
                 //entity.HasOne(d => d.IdusuarioNavigation)
                 //    .WithMany()

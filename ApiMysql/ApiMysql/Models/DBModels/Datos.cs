@@ -14,8 +14,8 @@ namespace ApiMysql.Models.DBModels
         public string Acez { get; set; }
         public DateTime Fecha { get; set; }
         public TimeSpan Hora { get; set; }
-        public string Velocidad { get; set; }
-        public string Gforce { get; set; }
+        public float Velocidad { get; set; }
+        public float Gforce { get; set; }
 
         //public virtual Usuario IdusuarioNavigation { get; set; }
         //public virtual Vehiculo IdvehiculoNavigation { get; set; }

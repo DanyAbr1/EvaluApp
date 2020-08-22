@@ -22,11 +22,12 @@ namespace ApiMysql.Controllers
         [HttpPost("buscarDatos")]
         public ActionResult<IEnumerable<Eventos>> BuscarDatos([FromBody] Datos datos)
         {
-
-            var fechahoy = DateTime.Now.Date.ToString("yyyy-MM-dd");
+            var fechahoy = DateTime.UtcNow;
+            fechahoy = fechahoy.AddHours(-4);
+            var fechapais = fechahoy.AddHours(-4).ToString("yyyy-MM-dd");
             //if (datos.Fecha != null) fechahoy = datos.Fecha.ToString("yyyy-MM-dd");
-            var result = _context.Datos.Where(e => e.Idusuario == datos.Idusuario && e.Idvehiculo == datos.Idvehiculo && e.Fecha == DateTime.Parse(fechahoy)).ToList();
-            result = result.Where(e => float.Parse(e.Velocidad) > 20 || float.Parse(e.Gforce) >= 60).ToList();
+            var result = _context.Datos.Where(e => e.Idusuario == datos.Idusuario && e.Idvehiculo == datos.Idvehiculo && e.Fecha == DateTime.Parse(fechapais)).ToList();            
+            result = result.Where(e => e.Velocidad > 15 || e.Gforce > 2.5).ToList();
             //var group = result.GroupBy(x=> {
 
             //    return TimeSpan.FromMinutes(x.Hora.Minutes);
@@ -60,7 +61,7 @@ namespace ApiMysql.Controllers
 
                 if (minutos != datos[i].Hora.Minutes) 
                 { 
-                    if (float.Parse(datos[i].Gforce) >= 60)
+                    if (datos[i].Gforce > 2.5)
                     {
                         {
 
@@ -70,31 +71,32 @@ namespace ApiMysql.Controllers
                                 Idusuario = datos[i].Idusuario,
                                 Idtipoevento = 1,
                                 Puntos = "30",
-                                Velocidad = float.Parse(datos[i].Velocidad),
+                                Velocidad = datos[i].Velocidad,
                                 Hora = datos[i].Hora
                             });
 
                         }
                     }
-                        var speed = SpeedMax(datos[i].Latitud, datos[i].Longitud);
+                    
+                    var speed = SpeedMax(datos[i].Latitud, datos[i].Longitud);
 
 
-                        if ((speed > 0) && speed < float.Parse(datos[i].Velocidad))
+                    if ((speed > 0) && speed < datos[i].Velocidad)
+                    {
+
+                        evento.Add(new Eventos()
                         {
 
-                            evento.Add(new Eventos()
-                            {
+                            Idvehiculo = datos[i].Idvehiculo,
+                            Idusuario = datos[i].Idusuario,
+                            Idtipoevento = 2,
+                            Puntos = "20",
+                            Velocidad = datos[i].Velocidad,
+                            Hora = datos[i].Hora
 
-                                Idvehiculo = datos[i].Idvehiculo,
-                                Idusuario = datos[i].Idusuario,
-                                Idtipoevento = 2,
-                                Puntos = "20",
-                                Velocidad = float.Parse(datos[i].Velocidad),
-                                Hora = datos[i].Hora
+                        });
 
-                            });
-
-                        }
+                    }
                 }
 
                 minutos = datos[i].Hora.Minutes;
