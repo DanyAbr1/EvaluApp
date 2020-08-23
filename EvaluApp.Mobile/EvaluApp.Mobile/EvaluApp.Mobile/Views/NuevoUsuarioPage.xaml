@@ -48,7 +48,7 @@
                     CornerRadius="10"
                     Keyboard="Default"
                     Opacity="50"
-                    Placeholder="Usuaruio"
+                    Placeholder="Usuario"
                     PlaceholderColor="Gray"
                     Text="{Binding Nombre}">
                     <Entry.Behaviors>

@@ -25,16 +25,26 @@ namespace ApiMysql.Controllers
             var fechahoy = DateTime.UtcNow;
             fechahoy = fechahoy.AddHours(-4);
             var fechapais = fechahoy.AddHours(-4).ToString("yyyy-MM-dd");
-            //if (datos.Fecha != null) fechahoy = datos.Fecha.ToString("yyyy-MM-dd");
-            var result = _context.Datos.Where(e => e.Idusuario == datos.Idusuario && e.Idvehiculo == datos.Idvehiculo && e.Fecha == DateTime.Parse(fechapais)).ToList();            
-            result = result.Where(e => e.Velocidad > 15 || e.Gforce > 2.5).ToList();
-            //var group = result.GroupBy(x=> {
+            //if (datos.Fecha != null) fechapais = datos.Fecha.ToString("yyyy-MM-dd");
 
-            //    return TimeSpan.FromMinutes(x.Hora.Minutes);
-            
-            //});
+            var result = _context.Datos.Where(e => e.Idusuario == datos.Idusuario
+              && e.Idvehiculo == datos.Idvehiculo && e.Fecha == DateTime.Parse(fechapais)
+              && (e.Velocidad > 15 || e.Gforce > 3))
+              .Select(x => new Datos()
+              {
+                  Longitud = x.Longitud,
+                  Latitud = x.Latitud,
+                  Hora = x.Hora,
+                  Velocidad = x.Velocidad,
+                  Gforce = x.Gforce,
+                  Idusuario = datos.Idusuario,
+                  Idvehiculo = datos.Idvehiculo
+                  
+              }).ToList();
 
-
+            //var result = _context.Datos.Where(e => e.Idusuario == datos.Idusuario && e.Idvehiculo == datos.Idvehiculo && e.Fecha == DateTime.Parse(fechapais)).ToList();            
+            //result = result.Where(e => e.Velocidad > 15 || e.Gforce > 3).ToList();
+    
             if (result == null )
             {
                 return BadRequest("No se encontraron datos para este usuario");
@@ -60,8 +70,11 @@ namespace ApiMysql.Controllers
 
 
                 if (minutos != datos[i].Hora.Minutes) 
-                { 
-                    if (datos[i].Gforce > 2.5)
+                {                    
+                    DateTime time = DateTime.Today.Add(datos[i].Hora);
+                    string displayTime = time.ToString("hh:mm tt");
+
+                    if (datos[i].Gforce > 3)
                     {
                         {
 
@@ -69,11 +82,11 @@ namespace ApiMysql.Controllers
                             {
                                 Idvehiculo = datos[i].Idvehiculo,
                                 Idusuario = datos[i].Idusuario,
-                                Idtipoevento = 1,
+                                Idtipoevento = 2,
                                 Puntos = "30",
                                 Velocidad = datos[i].Velocidad,
-                                Hora = datos[i].Hora
-                            });
+                                Hora = displayTime
+                            }) ;
 
                         }
                     }
@@ -89,11 +102,11 @@ namespace ApiMysql.Controllers
 
                             Idvehiculo = datos[i].Idvehiculo,
                             Idusuario = datos[i].Idusuario,
-                            Idtipoevento = 2,
+                            Idtipoevento = 1,
                             Puntos = "20",
                             Velocidad = datos[i].Velocidad,
-                            Hora = datos[i].Hora
-
+                            VelocidadMaxima =float.Parse(speed.ToString()),
+                            Hora = displayTime
                         });
 
                     }

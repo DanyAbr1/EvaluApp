@@ -11,7 +11,8 @@ namespace ApiMysql.Models.DBModels
         public int Idvehiculo { get; set; }
         public int Idusuario { get; set; }
         public float Velocidad { get; set; }
-        public TimeSpan Hora { get; set; }
+        public string Hora { get; set; }
+        public float VelocidadMaxima { get;set; }
 
         //public virtual Tipoeventos IdtipoeventoNavigation { get; set; }
         //public virtual Usuario IdusuarioNavigation { get; set; }

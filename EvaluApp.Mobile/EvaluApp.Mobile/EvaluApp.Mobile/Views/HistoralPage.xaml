@@ -4,7 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
-    Title="Historial"
+    Title="Historial de eventos"
     prism:ViewModelLocator.AutowireViewModel="True">
 
 
@@ -15,6 +15,7 @@
             HeightRequest="{Binding ListaEventos}"
             IsPullToRefreshEnabled="False"
             ItemsSource="{Binding ListaEventos, Mode=TwoWay}"
+            SelectionMode="None"
             VerticalOptions="Start">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -25,13 +26,57 @@
                                     <StackLayout Padding="8" Orientation="Horizontal">
 
                                         <Label
-                                            HorizontalOptions="StartAndExpand"
+                                            FontAttributes="Bold"
+                                            FontSize="Large"
+                                            HorizontalOptions="CenterAndExpand"
                                             Text="{Binding Descripcion}"
                                             VerticalOptions="Center" />
 
+                                    </StackLayout>
+
+                                    <StackLayout Padding="8" Orientation="Horizontal">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="Hora:" />
                                         <Label
                                             HorizontalOptions="End"
+                                            Text="{Binding Hora}"
+                                            VerticalOptions="Center" />
+                                    </StackLayout>
+
+                                    <StackLayout Padding="8" Orientation="Horizontal">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="Puntos:" />
+
+                                        <Label
+                                            HorizontalOptions="EndAndExpand"
                                             Text="{Binding Puntos, StringFormat='{0:N2}'}"
+                                            VerticalOptions="Center" />
+
+                                    </StackLayout>
+
+                                    <StackLayout Padding="8" Orientation="Horizontal">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="Velocidad:" />
+                                        <Label
+                                            HorizontalOptions="EndAndExpand"
+                                            Text="{Binding Velocidad, StringFormat='{0:N2} MPH'}"
+                                            VerticalOptions="Center" />
+                                    </StackLayout>
+
+                                    <StackLayout Padding="8" Orientation="Horizontal">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="Velocidad Maxima:" />
+                                        <Label
+                                            HorizontalOptions="End"
+                                            Text="{Binding VelocidadMaxima, StringFormat='{0:N2} MPH'}"
                                             VerticalOptions="Center" />
                                     </StackLayout>
                                 </StackLayout>

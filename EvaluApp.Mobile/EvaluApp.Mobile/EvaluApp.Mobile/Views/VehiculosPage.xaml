@@ -24,49 +24,48 @@
                     IsPullToRefreshEnabled="False"
                     ItemsSource="{Binding ListaVehiculos, Mode=TwoWay}"
                     SelectedItem="{Binding SelectVehiculo}"
+                    SelectionMode="None"
                     VerticalOptions="Start">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout>
-                                    <Frame HorizontalOptions="FillAndExpand">
-                                        <StackLayout>
-                                            <StackLayout Padding="8" Orientation="Horizontal">
+                                <Frame HorizontalOptions="FillAndExpand">
+                                    <StackLayout>
+                                        <StackLayout Padding="8" Orientation="Horizontal">
 
-                                                <Label
-                                                    FontAttributes="Bold"
-                                                    HorizontalOptions="StartAndExpand"
-                                                    Text="Matricula"
-                                                    VerticalOptions="Center" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                HorizontalOptions="StartAndExpand"
+                                                Text="Matricula"
+                                                VerticalOptions="Center" />
 
-                                                <Label
-                                                    FontAttributes="Bold"
-                                                    HorizontalOptions="End"
-                                                    Text="{Binding Matricula}"
-                                                    VerticalOptions="Center" />
-                                            </StackLayout>
-                                            <BoxView
-                                                BackgroundColor="#efefef"
-                                                HeightRequest="1"
-                                                HorizontalOptions="FillAndExpand" />
-                                            <StackLayout Padding="8" Orientation="Horizontal">
-
-                                                <Label
-                                                    FontAttributes="Bold"
-                                                    HorizontalOptions="StartAndExpand"
-                                                    Text="Total de Puntos:"
-                                                    VerticalOptions="Center" />
-
-                                                <Label
-                                                    FontAttributes="Bold"
-                                                    HorizontalOptions="End"
-                                                    Text="{Binding Puntos, StringFormat='{0:N2}'}"
-                                                    VerticalOptions="Center" />
-                                            </StackLayout>
-
+                                            <Label
+                                                FontAttributes="Bold"
+                                                HorizontalOptions="End"
+                                                Text="{Binding Matricula}"
+                                                VerticalOptions="Center" />
                                         </StackLayout>
-                                    </Frame>
-                                </StackLayout>
+                                        <BoxView
+                                            BackgroundColor="#efefef"
+                                            HeightRequest="1"
+                                            HorizontalOptions="FillAndExpand" />
+                                        <StackLayout Padding="8" Orientation="Horizontal">
+
+                                            <Label
+                                                FontAttributes="Bold"
+                                                HorizontalOptions="StartAndExpand"
+                                                Text="Total de Puntos:"
+                                                VerticalOptions="Center" />
+
+                                            <Label
+                                                FontAttributes="Bold"
+                                                HorizontalOptions="End"
+                                                Text="{Binding Puntos, StringFormat='{0:N2}'}"
+                                                VerticalOptions="Center" />
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                </Frame>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

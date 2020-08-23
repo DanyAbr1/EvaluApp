@@ -162,7 +162,13 @@ namespace ApiMysql.Models.DBModels
 
                 entity.Property(e => e.Hora)
                     .HasColumnName("hora")
-                    .HasColumnType("time");
+                    .HasColumnType("char(20)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.VelocidadMaxima)
+                    .HasColumnName("velocidadMaxima")
+                    .HasColumnType("float");
                 //entity.HasOne(d => d.IdtipoeventoNavigation)
                 //    .WithMany(p => p.Eventos)
                 //    .HasForeignKey(d => d.Idtipoevento)
