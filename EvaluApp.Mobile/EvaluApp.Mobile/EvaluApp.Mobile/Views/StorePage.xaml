@@ -3,99 +3,122 @@
     x:Class="EvaluApp.Mobile.Views.StorePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:EvaluApp.Mobile.Controls"
+    xmlns:local="clr-namespace:EvaluApp.Mobile.Behaviors"
     xmlns:localator="clr-namespace:EvaluApp.Mobile"
     xmlns:prism="http://prismlibrary.com"
     Title="Store"
-    prism:ViewModelLocator.AutowireViewModel="True">
+    prism:ViewModelLocator.AutowireViewModel="True"
+    NavigationPage.HasNavigationBar="True">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="" />
     </ContentPage.ToolbarItems>
     <Grid HorizontalOptions="FillAndExpand">
+        <StackLayout Padding="10">
+            <StackLayout Padding="10" Orientation="Horizontal">
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="!!!Canjea tus puntos por articulos!!!"
+                    VerticalOptions="CenterAndExpand" />
+                <StackLayout Padding="5" VerticalOptions="End">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ComprarCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Label
+                        FontFamily="{StaticResource MaterialFontFamily}"
+                        FontSize="50"
+                        HorizontalOptions="End"
+                        Text="{x:Static localator:IconFont.ShoppingCart}"
+                        TextColor="#1E8BE3" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalOptions="End"
+                        Text="Pagar"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+            </StackLayout>
+            <BoxView
+                BackgroundColor="#efefef"
+                HeightRequest="1"
+                HorizontalOptions="FillAndExpand" />
+            <!--<Button Margin="50,0" Text="Pagar" />-->
+
+            <ListView
+                HasUnevenRows="true"
+                HeightRequest="{Binding ListaArticulo}"
+                IsPullToRefreshEnabled="False"
+                ItemsSource="{Binding ListaArticulo, Mode=TwoWay}"
+                SelectionMode="None"
+                VerticalOptions="Start">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ProductoFrame}">
+                                    <StackLayout>
+
+                                        <StackLayout Padding="8" Orientation="Horizontal">
+
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Large"
+                                                HorizontalOptions="StartAndExpand"
+                                                Text="{Binding Descripcion}"
+                                                VerticalOptions="Center" />
+
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Large"
+                                                HorizontalOptions="End"
+                                                Text="{Binding Precio, StringFormat='${0:N2}'}"
+                                                VerticalOptions="Center" />
 
 
-        <ListView
-            HasUnevenRows="true"
-            HeightRequest="{Binding ListaArticulo}"
-            IsPullToRefreshEnabled="False"
-            ItemsSource="{Binding ListaArticulo, Mode=TwoWay}"
-            VerticalOptions="Start">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-                            <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ProductoFrame}">
-                                <StackLayout>
-                                    <!--<StackLayout Padding="8" Orientation="Horizontal">
-                                        <Label
-                                            FontAttributes="Bold"
-                                            FontSize="Large"
-                                            HorizontalOptions="StartAndExpand"
-                                            Text="{Binding Descripcion}"
-                                            VerticalOptions="Center" />
-                                        <Label
-                                            FontSize="Large"
-                                            HorizontalOptions="End"
-                                            Text="{Binding Precio, StringFormat='${0:N2}'}"
-                                            TextColor="Black"
-                                            VerticalOptions="Center" />
+                                        </StackLayout>
+                                        <BoxView
+                                            BackgroundColor="#efefef"
+                                            HeightRequest="1"
+                                            HorizontalOptions="FillAndExpand" />
+                                        <StackLayout Padding="8" Orientation="Horizontal">
+
+                                            <Entry
+                                                Placeholder="Cantidad"
+                                                PlaceholderColor="Gray"
+                                                Text="{Binding Cantidad}" />
+                                            <!--<StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SelectMenuCommand}" />
+                                        </StackLayout.GestureRecognizers>-->
+                                            <!--
+                                            <Button
+                                                Command="{Binding AddCarCommand}"
+                                                HorizontalOptions="End"
+                                                Text="Agregar"
+                                                VerticalOptions="End" />
+
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Large"
+                                                HorizontalOptions="EndAndExpand"
+                                                Text="{Binding TotalItem}"
+                                                TextColor="Red"
+                                                VerticalOptions="End" />-->
+
+                                        </StackLayout>
+
+
                                     </StackLayout>
-
-                                    <StackLayout Orientation="Horizontal">
-                                        <Entry
-                                            Placeholder="Cantidad"
-                                            PlaceholderColor="Gray"
-                                            Text="{Binding Cantidad}" />
-
-                                        <Button
-                                            Command="{Binding AddCommand}"
-                                            HorizontalOptions="End"
-                                            Text="Agregar" />
-
-                                    </StackLayout>-->
-
-                                    <StackLayout Padding="8" Orientation="Horizontal">
-
-                                        <Label
-                                            FontAttributes="Bold"
-                                            HorizontalOptions="StartAndExpand"
-                                            Text="{Binding Descripcion}"
-                                            VerticalOptions="Center" />
-
-                                        <Label
-                                            FontAttributes="Bold"
-                                            HorizontalOptions="End"
-                                            Text="{Binding Precio, StringFormat='${0:N2}'}"
-                                            VerticalOptions="Center" />
-                                    </StackLayout>
-                                    <BoxView
-                                        BackgroundColor="#efefef"
-                                        HeightRequest="1"
-                                        HorizontalOptions="FillAndExpand" />
-                                    <StackLayout Padding="8" Orientation="Horizontal">
-
-                                        <Entry
-                                            Placeholder="Cantidad"
-                                            PlaceholderColor="Gray"
-                                            Text="{Binding Cantidad}" />
-                                        <Button
-                                            Command="{Binding AddCommand}"
-                                            HorizontalOptions="End"
-                                            Style="{StaticResource ButtonNormal}"
-                                            Text="Agregar"
-                                            VerticalOptions="End" />
-
-                                    </StackLayout>
-
-
-                                </StackLayout>
-                            </Frame>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        
+                                </Frame>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </Grid>
+
 </ContentPage>

@@ -123,6 +123,7 @@ namespace EvaluApp.Mobile.ViewModels
 
             Preferences.Set("idUsuario", response.Result.Idusuario);
             Preferences.Set("nombreCompleto", $"{ response.Result.Nombre1} { response.Result.Nombre2} {response.Result.Apellido1 }");
+            Preferences.Set("TotalPagado", "0");
 
             var parameter = new NavigationParameters();
             parameter.Add("Usuario", response.Result);

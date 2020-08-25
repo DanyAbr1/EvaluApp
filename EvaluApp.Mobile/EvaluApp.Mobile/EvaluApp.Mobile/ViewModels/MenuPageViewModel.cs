@@ -10,10 +10,10 @@ namespace EvaluApp.Mobile.ViewModels
     public class MenuPageViewModel : ViewModelBase
     {
         private INavigationService _navigationService;
-        private DelegateCommand _selectMenuCommand;
-        private DelegateCommand _verPerfilUsuarioCommand;
+        private DelegateCommand _selectMenuCommand;       
         private Menu _menu;
         private string _nombreCompleto;
+        private Usuario _usuario;
 
         public MenuPageViewModel(INavigationService navigationService)
              : base(navigationService)
@@ -37,6 +37,12 @@ namespace EvaluApp.Mobile.ViewModels
         //    get => _nombreCompleto;
         //    set => SetProperty(ref _nombreCompleto, value);
         //}
+
+        public Usuario Usuario
+        {
+            get => _usuario;
+            set => SetProperty(ref _usuario, value);
+        }
 
         public string NombreCompleto
         {
@@ -91,18 +97,23 @@ namespace EvaluApp.Mobile.ViewModels
             {
                 var confirm = await App.Current.MainPage.DisplayAlert("Información", "¿Esta seguro que desea cerrar la sesión?", "Salir", "Cancelar");
                 if (confirm)
-                {
-                    Preferences.Set("token", "");
+                {                    
                     await _navigationService.NavigateAsync("/NavigationPage/LoginPage");
                 }
 
                 return;
             }
-
-            await _navigationService.NavigateAsync($"/MenuPage/NavigationPage/{Menu.Pagina}");
+            var parameter = new NavigationParameters();
+            parameter.Add("Usuario", Usuario);
+            await _navigationService.NavigateAsync($"/MenuPage/NavigationPage/{Menu.Pagina}", parameter);
 
         }
 
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            Usuario = (Usuario)parameters["Usuario"];
+            base.OnNavigatedTo(parameters);
+        }
         #endregion
 
     }

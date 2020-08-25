@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EvaluApp.Mobile.Views.FacturaPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    Title="Factura"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <Grid>
+        <Frame>
+            <StackLayout Padding="20">
+
+                <StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <Label
+                            FontSize="60"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Total a pagar:" />
+                        <Label
+                            FontSize="60"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="{Binding Total, StringFormat='${0:N2}'}" />
+
+
+
+                    </StackLayout>
+
+                </StackLayout>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Gracias Por su Compra!"
+                    VerticalOptions="CenterAndExpand" />
+                <Button
+                    Command="{Binding PagarCommand}"
+                    Text="Pagar"
+                    VerticalOptions="EndAndExpand" />
+            </StackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

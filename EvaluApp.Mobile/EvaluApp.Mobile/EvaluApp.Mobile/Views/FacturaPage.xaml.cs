@@ -2,9 +2,9 @@
 
 namespace EvaluApp.Mobile.Views
 {
-    public partial class TestPage : ContentPage
+    public partial class FacturaPage : ContentPage
     {
-        public TestPage()
+        public FacturaPage()
         {
             InitializeComponent();
         }

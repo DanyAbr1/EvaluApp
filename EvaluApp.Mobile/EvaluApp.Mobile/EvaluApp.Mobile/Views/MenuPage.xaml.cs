@@ -25,7 +25,7 @@ namespace EvaluApp.Mobile.Views
             _idPage = Preferences.Get("menuPage", "default_value");
             if (_idPage.Equals("VehiculosPageViewModel")                                              
                 || _idPage.Equals("NuevoUsuarioPageViewModel")
-                || _idPage.Equals("StorePagePageViewModel")
+                || _idPage.Equals("StorePageViewModel")
                 || _idPage.Equals("HistoralPageViewModel")
                 || _idPage.Equals("PerfilUsuarioPageViewModel"))
             {

@@ -16,28 +16,24 @@
 
             <Label
                 Grid.Row="0"
-                Margin="20,35,20,20"
                 FontSize="Medium"
                 HorizontalOptions="CenterAndExpand"
                 Text="{Binding NombreCompleto}"
                 VerticalOptions="CenterAndExpand"
                 VerticalTextAlignment="Center" />
 
-            <Frame
-                Grid.Row="1"
-                Margin="20,15,20,15"
-                Style="{StaticResource ProductoFrame}">
+            <Frame Margin="20" Style="{StaticResource ProductoFrame}">
 
                 <StackLayout
-                    Padding="16"
+                    Padding="20"
                     Orientation="Vertical"
                     Spacing="15">
 
                     <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
-                        <Label Text="Identificador:" VerticalOptions="CenterAndExpand" />
+                        <Label Text="Usuario:" VerticalOptions="CenterAndExpand" />
                         <Label
                             HorizontalOptions="EndAndExpand"
-                            Text="{Binding Usuario.Identificador}"
+                            Text="{Binding Usuario.Nombre1}"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
                     <BoxView
@@ -46,24 +42,49 @@
                         HorizontalOptions="FillAndExpand" />
 
                     <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
-                        <Label Text="Cedula:" VerticalOptions="CenterAndExpand" />
+                        <Label Text="Nombre:" VerticalOptions="CenterAndExpand" />
+                        <Label
+                            HorizontalOptions="EndAndExpand"
+                            Text="{Binding Usuario.Nombre2}"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+
+
+                    <BoxView
+                        BackgroundColor="#efefef"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand" />
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                        <Label Text="Apellido:" VerticalOptions="CenterAndExpand" />
+                        <Label
+                            HorizontalOptions="EndAndExpand"
+                            Text="{Binding Usuario.Apellido1}"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+                    <BoxView
+                        BackgroundColor="#efefef"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand" />
+
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                        <Label Text="Cédula:" VerticalOptions="CenterAndExpand" />
                         <Label
                             HorizontalOptions="EndAndExpand"
                             Text="{Binding Usuario.Cedula}"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
-
-
                     <BoxView
                         BackgroundColor="#efefef"
                         HeightRequest="1"
                         HorizontalOptions="FillAndExpand" />
 
                     <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
-                        <Label Text="Teléfono:" VerticalOptions="CenterAndExpand" />
+                        <Label Text="Fecha Nacimiento:" VerticalOptions="CenterAndExpand" />
                         <Label
                             HorizontalOptions="EndAndExpand"
-                            Text="{Binding Usuario.Telefono}"
+                            Text="{Binding Usuario.FechaNacimiento}"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
                 </StackLayout>
