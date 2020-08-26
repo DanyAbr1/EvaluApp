@@ -1,8 +1,11 @@
 ﻿using EvaluApp.Mobile.Models;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Xamarin.Essentials;
 
 namespace EvaluApp.Mobile.ViewModels
 {
@@ -14,12 +17,18 @@ namespace EvaluApp.Mobile.ViewModels
         private float _cantidad;
         private float _precio;
         private Articulos _items;
-        
+        private List<Vehiculo> _vehiculos;
+        private SelectVehiculos _itemVehiculos;
+        private List<SelectVehiculos> _listVehiculosSelect;
 
         public StorePageViewModel(INavigationService navigationService) : base(navigationService)
         {
             _navigationService = navigationService;
             CreateIntems();
+            var x = Preferences.Get("vehiculos", "");
+            _vehiculos = JsonConvert.DeserializeObject<List<Vehiculo>>(x);
+            SelectVehiculo();
+
         }
 
 
@@ -51,6 +60,20 @@ namespace EvaluApp.Mobile.ViewModels
             get => _total;
             set => SetProperty(ref _total, value);
         }
+
+        public SelectVehiculos ItemVehiculos
+        {
+            get => _itemVehiculos;
+            set => SetProperty(ref _itemVehiculos, value);
+        }
+
+
+
+        public List<SelectVehiculos> ListVehiculosSelect
+        {
+            get => _listVehiculosSelect;
+            set => SetProperty(ref _listVehiculosSelect, value);
+        }
         #endregion
 
         #region Metodos
@@ -79,15 +102,44 @@ namespace EvaluApp.Mobile.ViewModels
                 
             }
 
+            if(ItemVehiculos == null)
+            {
+                await Prism.PrismApplicationBase.Current.MainPage.DisplayAlert("Información", "Debes seleccionar un vehiculo", "Aceptar");
+                return;
+            }
+
             if (_total == 0)
             {
                 await Prism.PrismApplicationBase.Current.MainPage.DisplayAlert("Información", "Debes agregar al menos un articulo al carrito de compras", "Aceptar"); 
                 return;
             }
+
+            float puntos = _vehiculos.FirstOrDefault(x => x.Idvehiculo == ItemVehiculos.Id).Puntos;
+            if (_total > puntos)
+            {
+                await Prism.PrismApplicationBase.Current.MainPage.DisplayAlert("Información", "No tienes puntos suficientes", "Aceptar");
+                return;
+            }
+
             var parameter = new NavigationParameters();         
             parameter.Add("Total", _total);
+            parameter.Add("idvehiculopago", ItemVehiculos.Id);
             await _navigationService.NavigateAsync("FacturaPage", parameter);
         }
+
+        private void SelectVehiculo()
+        {
+            // Create a list of parts.
+            var list = new List<SelectVehiculos>();
+
+            for (int i = 0; i < _vehiculos.Count; i++)
+            {
+                list.Add(new SelectVehiculos() { Id = _vehiculos[i].Idvehiculo, NameVehiculos = $"{ _vehiculos[i].Matricula } - ${_vehiculos[i].Puntos.ToString("0.00") }" });
+            }
+
+            ListVehiculosSelect = list;
+        }
+
 
         #endregion
     }

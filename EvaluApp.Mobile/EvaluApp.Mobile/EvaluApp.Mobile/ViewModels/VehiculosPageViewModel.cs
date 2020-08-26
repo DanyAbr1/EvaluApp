@@ -3,12 +3,11 @@ using EvaluApp.Mobile.Services;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
-using System;
-using Xamarin.Forms;
 
 namespace EvaluApp.Mobile.ViewModels
 {
@@ -26,31 +25,31 @@ namespace EvaluApp.Mobile.ViewModels
 
         private float _penalizacion;
         private string _idPage;
-        private DelegateCommand _selectVehiculo;
-        private int _listIndex;
-        private Vehiculo _vehiculoObj;
         private float _totapagado;
+        private int _idpagado;
+        private Vehiculo _Vehiculo;
+        private int _idvehiculo;
 
         public VehiculosPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             _navigationService = navigationService;
             _apiService = new ApiService();
-            _listaVehiculos = new List<Vehiculo>();
             _listaEventos = new List<Eventos>();
             _usuario = Preferences.Get("idUsuario", 0);
             _totapagado = float.Parse(Preferences.Get("TotalPagado", "0"));
+            _idpagado = int.Parse(Preferences.Get("idPagado", "0"));
             Title = "Inicio";
-           // SelectHistoralCommand = new DelegateCommand(SelectHistorialPage, () => VehiculoObj != null).ObservesProperty(() => VehiculoObj);
             GetVehiculos();
+
         }
 
 
         #region Propiedades
 
         public DelegateCommand SelectHistoralCommand => _selectHistoralCommand ?? (_selectHistoralCommand = new DelegateCommand(SelectHistorialPage));
+
         public DelegateCommand NuevoVehiculoCommand => _nuevoVehiculoCommand ?? (_nuevoVehiculoCommand = new DelegateCommand(NuevoVehiculo));
 
-        //public DelegateCommand SelectHistoralCommand { get; private set; }
 
         public List<Vehiculo> ListaVehiculos
         {
@@ -61,7 +60,7 @@ namespace EvaluApp.Mobile.ViewModels
         {
             get => _listaEventos;
             set => SetProperty(ref _listaEventos, value);
-        }        
+        }
 
         public bool IsRunning
         {
@@ -69,6 +68,11 @@ namespace EvaluApp.Mobile.ViewModels
             set => SetProperty(ref _isRunning, value);
         }
 
+        public Vehiculo VehiculoObj
+        {
+            get => _Vehiculo;
+            set => SetProperty(ref _Vehiculo, value);
+        }
         #endregion
 
         #region Metodos
@@ -79,9 +83,9 @@ namespace EvaluApp.Mobile.ViewModels
             _idPage = Preferences.Get("menuPage", "default_value");
             if (_idPage == "NuevoVehiculoPageViewModel")
             {
-                
-                GetVehiculos();
-                
+
+                await GetVehiculos();
+
             }
 
         }
@@ -97,8 +101,7 @@ namespace EvaluApp.Mobile.ViewModels
                 var request = new
                 {
                     idusuario = _usuario,
-                    idvehiculo = ListaVehiculos[i].Idvehiculo,
-                    fecha = "2020-08-23"
+                    idvehiculo = ListaVehiculos[i].Idvehiculo
                 };
 
                 var url = Prism.PrismApplicationBase.Current.Resources["UrlAPI"].ToString();
@@ -137,17 +140,17 @@ namespace EvaluApp.Mobile.ViewModels
                             VelocidadMaxima = response.Result[iev].VelocidadMaxima
                         });
 
-                        
-                       
+
+
                         _penalizacion += float.Parse(ListaEventos[iev].Puntos.ToString());
                     }
-                                       
+
                 }
-                                
+
 
                 var total = 5000 - _penalizacion;
                 ListaVehiculos[i].Puntos = total;
-            
+
             }
 
             if (_totapagado > 0)
@@ -157,14 +160,14 @@ namespace EvaluApp.Mobile.ViewModels
                     Ideventos = 0,
                     Idtipoevento = 3,
                     Puntos = _totapagado.ToString(),
-                    Idvehiculo = ListaVehiculos[0].Idvehiculo,
+                    Idvehiculo = _idpagado,
                     Idusuario = _usuario,
                     Velocidad = 0,
                     Hora = DateTime.Now.ToString("hh:mm tt"),
                     VelocidadMaxima = 0
                 });
 
-                ListaVehiculos[0].Puntos -= _totapagado;
+                ListaVehiculos.FirstOrDefault(x => x.Idvehiculo == _idpagado).Puntos -= _totapagado;
             }
 
             var src = ListaVehiculos;
@@ -199,24 +202,35 @@ namespace EvaluApp.Mobile.ViewModels
                 for (int i = 0; i < response.Result.Count; i++)
                 {
                     response.Result[i].Puntos = 5000;
-                }                
+                }
                 ListaVehiculos = response.Result.ToList();
                 await GetEventos();
             }
-
+            var vehiculos = JsonConvert.SerializeObject(ListaVehiculos);
+            Preferences.Set("vehiculos", vehiculos);
 
             IsRunning = false;
+
         }
 
 
         private async void SelectHistorialPage()
         {
-            
+            //    Vehiculo vehiculo = new Vehiculo() 
+            //    {
+            //        Idvehiculo = VehiculoObj.Idvehiculo
+            //    };
+            //    var parameter = new NavigationParameters();
+            //    parameter.Add("Historial", ListaEventos.Where(x=> x.Idvehiculo == vehiculo.Idvehiculo));
+            //    await _navigationService.NavigateAsync("HistoralPage", parameter);
+
             var parameter = new NavigationParameters();
             parameter.Add("Historial", ListaEventos);
             await _navigationService.NavigateAsync("HistoralPage", parameter);
-        }
 
+
+
+        }
         private async void NuevoVehiculo()
         {
             await _navigationService.NavigateAsync("NuevoVehiculoPage");

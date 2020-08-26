@@ -24,6 +24,7 @@ namespace EvaluApp.Mobile.ViewModels
         private DelegateCommand _loginCommand;
         private DelegateCommand _registrarCommand;
         private DelegateCommand _restaurarPassCommand;
+        private bool _encendido;
 
         public LoginPageViewModel(INavigationService navigationService)
             : base(navigationService)
@@ -31,6 +32,7 @@ namespace EvaluApp.Mobile.ViewModels
             _navigationService = navigationService;
             _apiService =  new ApiService();
             _isEnabled = true;
+            
         }
 
         #region Propiedades
@@ -61,7 +63,6 @@ namespace EvaluApp.Mobile.ViewModels
             set => SetProperty(ref _isEnabled, value);
         }
         #endregion
-
 
         #region Metodos
         private async void Login()
@@ -124,6 +125,8 @@ namespace EvaluApp.Mobile.ViewModels
             Preferences.Set("idUsuario", response.Result.Idusuario);
             Preferences.Set("nombreCompleto", $"{ response.Result.Nombre1} { response.Result.Nombre2} {response.Result.Apellido1 }");
             Preferences.Set("TotalPagado", "0");
+            Preferences.Set("idPagado", "0");
+
 
             var parameter = new NavigationParameters();
             parameter.Add("Usuario", response.Result);

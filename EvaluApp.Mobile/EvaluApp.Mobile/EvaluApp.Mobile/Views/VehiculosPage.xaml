@@ -20,10 +20,9 @@
                 <ListView
                     locator:ItemTappedAttached.Command="{Binding SelectHistoralCommand}"
                     HasUnevenRows="true"
-                    HeightRequest="{Binding ListaVehiculos}"
                     IsPullToRefreshEnabled="False"
                     ItemsSource="{Binding ListaVehiculos, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectVehiculo}"
+                    SelectedItem="{Binding VehiculoObj}"
                     SelectionMode="None"
                     VerticalOptions="Start">
                     <ListView.ItemTemplate>

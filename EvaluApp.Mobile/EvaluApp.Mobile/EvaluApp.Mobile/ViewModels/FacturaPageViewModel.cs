@@ -15,6 +15,7 @@ namespace EvaluApp.Mobile.ViewModels
         private ApiService _apiService;
         private DelegateCommand _pagarCommand;
         private float _total;
+        private int _idVehiculo;
 
         public FacturaPageViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -37,6 +38,7 @@ namespace EvaluApp.Mobile.ViewModels
         private async void Pagar()
         {
             Preferences.Set("TotalPagado", _total.ToString());
+            Preferences.Set("idPagado", _idVehiculo.ToString());
             await App.Current.MainPage.DisplayAlert("Información","El pago se ha realizado con éxito." , "Aceptar");
             await _navigationService.NavigateAsync("/MenuPage/NavigationPage/VehiculosPage");
         }
@@ -46,7 +48,7 @@ namespace EvaluApp.Mobile.ViewModels
             if (parameters.GetNavigationMode() != Prism.Navigation.NavigationMode.Back)
             {
                 Total = float.Parse(parameters["Total"].ToString());
-
+                _idVehiculo = int.Parse(parameters["idvehiculopago"].ToString());
                 base.OnNavigatedTo(parameters);
             }
         }

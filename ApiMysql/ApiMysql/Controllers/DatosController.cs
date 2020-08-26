@@ -40,7 +40,7 @@ namespace ApiMysql.Controllers
                   Idusuario = datos.Idusuario,
                   Idvehiculo = datos.Idvehiculo
                   
-              }).ToList();
+              }).OrderByDescending(d =>d.Gforce).ThenBy(h =>h.Hora).ToList();
 
             //var result = _context.Datos.Where(e => e.Idusuario == datos.Idusuario && e.Idvehiculo == datos.Idvehiculo && e.Fecha == DateTime.Parse(fechapais)).ToList();            
             //result = result.Where(e => e.Velocidad > 15 || e.Gforce > 3).ToList();
@@ -72,7 +72,7 @@ namespace ApiMysql.Controllers
                 if (minutos != datos[i].Hora.Minutes) 
                 {                    
                     DateTime time = DateTime.Today.Add(datos[i].Hora);
-                    string displayTime = time.ToString("hh:mm tt");
+                    string displayTime = time.ToString("hh:mm:ss tt");
 
                     if (datos[i].Gforce > 3)
                     {

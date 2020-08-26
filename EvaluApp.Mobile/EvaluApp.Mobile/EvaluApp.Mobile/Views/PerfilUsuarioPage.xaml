@@ -84,7 +84,7 @@
                         <Label Text="Fecha Nacimiento:" VerticalOptions="CenterAndExpand" />
                         <Label
                             HorizontalOptions="EndAndExpand"
-                            Text="{Binding Usuario.FechaNacimiento}"
+                            Text="{Binding Usuario.Fechanacimiento, StringFormat='{}{0:dd-MM-yyyy}'}"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
                 </StackLayout>

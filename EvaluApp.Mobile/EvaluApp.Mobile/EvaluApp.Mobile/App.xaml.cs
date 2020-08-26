@@ -43,6 +43,7 @@ namespace EvaluApp.Mobile
             containerRegistry.RegisterForNavigation<StorePage, StorePageViewModel>();
             containerRegistry.RegisterForNavigation<PerfilUsuarioPage, PerfilUsuarioPageViewModel>();
             containerRegistry.RegisterForNavigation<NuevoVehiculoPage, NuevoVehiculoPageViewModel>();
+            containerRegistry.RegisterForNavigation<FacturaPage, FacturaPageViewModel>();
         }
     }
 }
